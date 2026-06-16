@@ -1,0 +1,112 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --navy: #133C65;
+  --navy-dark: #0D2A47;
+  --navy-medium: #1B5490;
+  --navy-light: #EBF3FF;
+  --gold: #C47F0C;
+  --gold-bright: #E8A31C;
+  --gold-light: #FFF8E7;
+  --green: #1A9152;
+  --red: #C0392B;
+  --white: #FFFFFF;
+  --off-white: #F5F7FB;
+  --border: #D4E4F4;
+  --text: #1A2B3C;
+  --text-secondary: #4A6070;
+  --text-muted: #7A90A0;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 2px 16px rgba(19, 60, 101, 0.08);
+  --shadow-elevated: 0 8px 40px rgba(19, 60, 101, 0.16);
+  --shadow-sm: 0 1px 4px rgba(19, 60, 101, 0.06);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --surface: #F4F6F8;
+
+  --transition: all 0.2s ease;
+  --transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#app {
+  min-height: 100svh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-ui);
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: var(--navy-light);
+  color: var(--navy);
+}
+
+:focus-visible {
+  outline: 2px solid var(--navy-medium);
+  outline-offset: 2px;
+}
+
+/* ── Scrollbar ───────────────────────────── */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F4F6F8; }
+::-webkit-scrollbar-thumb { background: #C5CDD6; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #728196; }
+
+/* ── Dark mode ───────────────────────────── */
+.dark {
+  --surface: #1D293D;
+  --border: #3D5069;
+  --text: #E2E8F0;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --white: #1D293D;
+  --off-white: #162033;
+  --navy-light: rgba(147,184,216,0.12);
+}
+
+.dark body {
+  background-color: #0F172B;
+  color: #E2E8F0;
+}
+
+.dark ::-webkit-scrollbar-track { background: #1D293D; }
+.dark ::-webkit-scrollbar-thumb { background: #3D5069; }
+.dark ::-webkit-scrollbar-thumb:hover { background: #4D6380; }

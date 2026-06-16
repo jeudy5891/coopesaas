@@ -1,0 +1,46 @@
+import { createRouter, createWebHistory } from 'vue-router'
+import LandingPage from '../views/LandingPage.vue'
+import LoginPage from '../views/LoginPage.vue'
+import DashboardLayout from '../layouts/DashboardLayout.vue'
+import DashboardHome from '../views/DashboardHome.vue'
+import PersonalView from '../views/PersonalView.vue'
+import AsociadosView from '../views/AsociadosView.vue'
+import OrganosView from '../views/OrganosView.vue'
+import ComitesView from '../views/ComitesView.vue'
+import AsambleasView from '../views/AsambleasView.vue'
+import VotacionesView from '../views/VotacionesView.vue'
+import ConfiguracionView from '../views/ConfiguracionView.vue'
+import RolesView from '../views/RolesView.vue'
+
+const routes = [
+  { path: '/', component: LandingPage, meta: { title: 'CoopeSaaS — Gestión Cooperativa' } },
+  { path: '/login', component: LoginPage, meta: { title: 'Iniciar sesión — CoopeSaaS' } },
+  {
+    path: '/dashboard',
+    component: DashboardLayout,
+    children: [
+      { path: '', component: DashboardHome, meta: { title: 'Inicio — CoopeSaaS' } },
+      { path: 'personal', component: PersonalView, meta: { title: 'Personal — CoopeSaaS' } },
+      { path: 'asociados', component: AsociadosView, meta: { title: 'Asociados — CoopeSaaS' } },
+      { path: 'organos', component: OrganosView, meta: { title: 'Órganos Sociales — CoopeSaaS' } },
+      { path: 'comites', component: ComitesView, meta: { title: 'Comités — CoopeSaaS' } },
+      { path: 'asambleas', component: AsambleasView, meta: { title: 'Asambleas — CoopeSaaS' } },
+      { path: 'votaciones', component: VotacionesView, meta: { title: 'Votaciones — CoopeSaaS' } },
+      { path: 'configuracion', component: ConfiguracionView, meta: { title: 'Configuración — CoopeSaaS' } },
+      { path: 'configuracion/roles', component: RolesView, meta: { title: 'Roles — CoopeSaaS' } },
+    ],
+  },
+]
+
+export const router = createRouter({
+  history: createWebHistory(),
+  routes,
+  scrollBehavior(to) {
+    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    return { top: 0 }
+  },
+})
+
+router.beforeEach((to) => {
+  document.title = to.meta.title || 'CoopeSaaS'
+})
