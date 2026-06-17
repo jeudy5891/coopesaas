@@ -116,7 +116,7 @@
                 :class="{ selected: selectedCandidate && selectedCandidate.id === cand.id }"
                 @click="selectedCandidate = cand"
               >
-                <img v-if="cand.photo" :src="cand.photo" :alt="cand.name" class="cand-photo" />
+                <img v-if="cand.photo" :src="photoSrc(cand.photo)" :alt="cand.name" class="cand-photo" />
                 <div v-else class="cand-icon" :style="{ background: cand.color }">{{ cand.icon }}</div>
                 <span class="cand-name">{{ cand.name }}</span>
               </div>
@@ -219,7 +219,7 @@
                 :key="cand.id"
                 class="cand-preview"
               >
-                <img v-if="cand.photo" :src="cand.photo" :alt="cand.name" class="cand-preview-photo" />
+                <img v-if="cand.photo" :src="photoSrc(cand.photo)" :alt="cand.name" class="cand-preview-photo" />
                 <div v-else class="cand-icon cand-preview-photo" :style="{ background: cand.color }">{{ cand.icon }}</div>
                 <span class="cand-preview-name">{{ cand.name }}</span>
               </div>
@@ -273,7 +273,7 @@
 
             <div class="bar-list">
               <div v-for="cand in currentDashboardElection.candidates" :key="cand.id" class="bar-row">
-                <img v-if="cand.photo" :src="cand.photo" :alt="cand.name" class="bar-photo" />
+                <img v-if="cand.photo" :src="photoSrc(cand.photo)" :alt="cand.name" class="bar-photo" />
                 <div v-else class="cand-icon bar-photo" :style="{ background: cand.color }">{{ cand.icon }}</div>
                 <div class="bar-info">
                   <span class="bar-name">{{ cand.name }}</span>
@@ -322,7 +322,7 @@
           <template v-if="(winnerElection.winnersCount || 1) === 1">
             <img
               v-if="winner(winnerElection).photo"
-              :src="winner(winnerElection).photo"
+              :src="photoSrc(winner(winnerElection).photo)"
               :alt="winner(winnerElection).name"
               class="winner-photo-large"
             />
@@ -345,7 +345,7 @@
                 :key="w.id"
                 class="multi-winner"
               >
-                <img v-if="w.photo" :src="w.photo" :alt="w.name" class="winner-photo-lg2" />
+                <img v-if="w.photo" :src="photoSrc(w.photo)" :alt="w.name" class="winner-photo-lg2" />
                 <div v-else class="cand-icon winner-photo-lg2" :style="{ background: w.color }">{{ w.icon }}</div>
                 <div class="winner-name-lg2">{{ w.name }}</div>
                 <div class="winner-votes-lg2">{{ w.votos }} {{ w.votos === 1 ? 'voto' : 'votos' }}</div>
@@ -359,7 +359,7 @@
               :key="cand.id"
               class="runner-up"
             >
-              <img v-if="cand.photo" :src="cand.photo" :alt="cand.name" class="runner-photo" />
+              <img v-if="cand.photo" :src="photoSrc(cand.photo)" :alt="cand.name" class="runner-photo" />
               <div v-else class="cand-icon runner-photo" :style="{ background: cand.color }">{{ cand.icon }}</div>
               <span class="runner-name">{{ cand.name }}</span>
               <span class="runner-votes">{{ cand.votos }} v.</span>
@@ -802,6 +802,12 @@ function isWinner(elec, cand) {
 function elecPercent(elec, cand) {
   const total = elec.candidates.reduce((s, c) => s + c.votos, 0)
   return total > 0 ? Math.round(cand.votos / total * 100) : 0
+}
+
+const BASE = import.meta.env.BASE_URL
+function photoSrc(path) {
+  if (!path) return path
+  return BASE + path.replace(/^\//, '')
 }
 </script>
 
