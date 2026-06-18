@@ -1175,7 +1175,7 @@ const steps = [
   font-size: 28px;
   font-weight: 800;
   color: white;
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
   letter-spacing: -0.5px;
 }
 

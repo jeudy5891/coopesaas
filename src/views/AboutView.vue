@@ -306,7 +306,7 @@ const values = [
 .story-content p { font-size: 15px; color: var(--text-secondary); line-height: 1.75; }
 .story-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .story-stat { background: #F7F9FC; border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; text-align: center; }
-.stat-big { display: block; font-size: 42px; font-weight: 800; color: var(--navy); font-family: var(--font-display); line-height: 1; margin-bottom: 8px; }
+.stat-big { display: block; font-size: 42px; font-weight: 800; color: var(--navy); font-family: var(--font-ui); line-height: 1; margin-bottom: 8px; }
 .stat-label { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
 
 /* ── Mission ─── */

@@ -487,7 +487,7 @@ const faqs = [
 .plan-name { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
 .plan-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
 .plan-price-wrap { display: flex; align-items: flex-end; gap: 4px; margin-bottom: 4px; }
-.plan-price { font-size: 48px; font-weight: 800; color: var(--navy); font-family: var(--font-display); line-height: 1; }
+.plan-price { font-size: 48px; font-weight: 800; color: var(--navy); font-family: var(--font-ui); line-height: 1; }
 .plan-period { font-size: 16px; color: var(--text-secondary); margin-bottom: 8px; }
 .plan-annual-note { font-size: 12px; color: #1A9152; font-weight: 500; min-height: 18px; margin-bottom: 6px; }
 .plan-limit { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
