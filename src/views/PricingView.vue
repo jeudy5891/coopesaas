@@ -67,7 +67,7 @@
               <span class="plan-price">${{ billing === 'anual' ? '37' : '45' }}</span>
               <span class="plan-period">/mes</span>
             </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $450/año · ahorras $90</div>
+            <div v-if="billing === 'anual'" class="plan-annual-note">Ahorras $90</div>
             <div v-else class="plan-annual-note">&nbsp;</div>
             <div class="plan-limit">Hasta 200 asociados · ~¢{{ billing === 'anual' ? '19,055' : '23,175' }}/mes</div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
@@ -77,7 +77,8 @@
               <li>Órganos sociales y juntas</li>
               <li>Asambleas y actas digitales</li>
               <li>Módulo de votaciones</li>
-              <li>1 usuario administrador</li>
+              <li>Gestión de personal</li>
+              <li>5 usuarios del sistema</li>
               <li>Soporte por correo electrónico</li>
             </ul>
           </div>
@@ -93,7 +94,7 @@
               <span class="plan-price">${{ billing === 'anual' ? '90' : '109' }}</span>
               <span class="plan-period">/mes</span>
             </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $1,090/año · ahorras $218</div>
+            <div v-if="billing === 'anual'" class="plan-annual-note">Ahorras $218</div>
             <div v-else class="plan-annual-note">&nbsp;</div>
             <div class="plan-limit">Hasta 500 asociados · ~¢{{ billing === 'anual' ? '46,350' : '56,135' }}/mes</div>
             <RouterLink to="/" class="plan-cta plan-cta--primary">Solicitar demo gratuita</RouterLink>
@@ -101,7 +102,8 @@
             <ul class="plan-features">
               <li>Hasta 500 asociados</li>
               <li>Reportes y estadísticas avanzadas</li>
-              <li>Hasta 5 usuarios con roles</li>
+              <li>Gestión de personal</li>
+              <li>10 usuarios del sistema</li>
               <li>Exportación de datos (Excel/PDF)</li>
               <li>Módulo de comités</li>
               <li>Soporte prioritario</li>
@@ -118,13 +120,14 @@
               <span class="plan-price">${{ billing === 'anual' ? '190' : '229' }}</span>
               <span class="plan-period">/mes</span>
             </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $2,290/año · ahorras $458</div>
+            <div v-if="billing === 'anual'" class="plan-annual-note">Ahorras $458</div>
             <div v-else class="plan-annual-note">&nbsp;</div>
             <div class="plan-limit">Asociados ilimitados</div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Pro, más:</div>
             <ul class="plan-features">
               <li>Asociados ilimitados</li>
+              <li>Gestión de personal</li>
               <li>Usuarios ilimitados</li>
               <li>Personalización de marca</li>
               <li>Capacitación del equipo incluida</li>

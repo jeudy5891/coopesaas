@@ -127,11 +127,10 @@
           <p class="section-subtitle">Tres desarrolladores con experiencia en tecnología, unidos por el objetivo de transformar el sector cooperativo.</p>
         </div>
         <div class="team-grid">
-          <div v-for="member in team" :key="member.name" class="team-card">
+          <div v-for="member in team" :key="member.role" class="team-card">
             <div class="team-avatar" :style="{ background: member.color }">
               {{ member.initials }}
             </div>
-            <h3 class="team-name">{{ member.name }}</h3>
             <div class="team-role">{{ member.role }}</div>
             <p class="team-bio">{{ member.bio }}</p>
           </div>
