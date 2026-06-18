@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoopeSaaS — Modelo de Negocio y Estrategia Comercial</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f4f6f9;
+      color: #1a2535;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #133C65 0%, #1a5490 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 200px; height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+    }
+    .header-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .header h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .header p {
+      font-size: 0.95rem;
+      opacity: 0.85;
+    }
+    .header-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    /* Section */
+    section {
+      background: white;
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #133C65;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid #e8edf3;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-icon {
+      width: 28px; height: 28px;
+      background: #e8f0fb;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    /* Market stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+    .stat-card {
+      background: #f7f9fc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+    .stat-card.highlight {
+      background: #133C65;
+      border-color: #133C65;
+      color: white;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #133C65;
+      display: block;
+      line-height: 1.1;
+    }
+    .stat-card.highlight .stat-num { color: #ffd166; }
+    .stat-label {
+      font-size: 0.78rem;
+      color: #64748b;
+      margin-top: 0.3rem;
+    }
+    .stat-card.highlight .stat-label { color: rgba(255,255,255,0.75); }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th {
+      background: #133C65;
+      color: white;
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+    th:first-child { border-radius: 8px 0 0 0; }
+    th:last-child { border-radius: 0 8px 0 0; }
+    td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid #f0f3f8;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #fafbfd; }
+    .focus-row td { background: #fff8e6 !important; font-weight: 600; }
+    .focus-row td:first-child { position: relative; }
+    .focus-tag {
+      display: inline-block;
+      background: #f59e0b;
+      color: white;
+      font-size: 0.65rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      font-weight: 700;
+      vertical-align: middle;
+    }
+    .total-row td {
+      background: #e8edf3 !important;
+      font-weight: 700;
+      color: #133C65;
+    }
+
+    /* Pricing cards */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .price-card {
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+    }
+    .price-card.featured {
+      border-color: #133C65;
+      box-shadow: 0 0 0 3px rgba(19,60,101,0.1);
+    }
+    .price-card .badge {
+      position: absolute;
+      top: -12px; left: 50%;
+      transform: translateX(-50%);
+      background: #133C65;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .plan-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #133C65;
+      margin-bottom: 0.25rem;
+    }
+    .plan-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1a2535;
+      line-height: 1;
+    }
+    .plan-price span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #64748b;
+    }
+    .plan-assoc {
+      font-size: 0.8rem;
+      color: #64748b;
+      margin: 0.4rem 0 1rem;
+    }
+    .plan-features {
+      list-style: none;
+      font-size: 0.85rem;
+      color: #374151;
+    }
+    .plan-features li {
+      padding: 0.25rem 0;
+      padding-left: 1.3rem;
+      position: relative;
+    }
+    .plan-features li::before {
+      content: '✓';
+      position: absolute; left: 0;
+      color: #16a34a;
+      font-weight: 700;
+    }
+    .plan-target {
+      margin-top: 1rem;
+      padding: 0.5rem 0.75rem;
+      background: #f0f4ff;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      color: #3b5bdb;
+      font-weight: 500;
+    }
+
+    /* Projection */
+    .projection-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .proj-card {
+      border-radius: 10px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+    .proj-card.conservador { background: #f1f5f9; border: 1px solid #cbd5e1; }
+    .proj-card.realista { background: #e8f5e9; border: 1px solid #a5d6a7; }
+    .proj-card.optimista { background: #fff3e0; border: 1px solid #ffcc80; }
+    .proj-scenario {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .conservador .proj-scenario { color: #64748b; }
+    .realista .proj-scenario { color: #2e7d32; }
+    .optimista .proj-scenario { color: #e65100; }
+    .proj-conversion { font-size: 0.88rem; color: #374151; margin-bottom: 0.4rem; }
+    .proj-amount {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .conservador .proj-amount { color: #475569; }
+    .realista .proj-amount { color: #2e7d32; }
+    .optimista .proj-amount { color: #e65100; }
+    .proj-sub { font-size: 0.75rem; color: #64748b; margin-top: 0.2rem; }
+
+    .growth-note {
+      background: #f0f9ff;
+      border-left: 4px solid #0284c7;
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.2rem;
+      font-size: 0.88rem;
+      color: #1e3a5f;
+    }
+    .growth-note strong { display: block; margin-bottom: 0.25rem; color: #0284c7; }
+
+    /* Strategy */
+    .strategy-list {
+      counter-reset: steps;
+      list-style: none;
+    }
+    .strategy-list li {
+      counter-increment: steps;
+      display: flex;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid #f0f3f8;
+      align-items: flex-start;
+    }
+    .strategy-list li:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      background: #133C65;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+    .step-content strong {
+      display: block;
+      color: #1a2535;
+      margin-bottom: 0.2rem;
+    }
+    .step-content p {
+      font-size: 0.88rem;
+      color: #64748b;
+    }
+
+    /* Road */
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .road-phase {
+      background: #f7f9fc;
+      border-radius: 10px;
+      padding: 1.1rem;
+      border-top: 3px solid #133C65;
+    }
+    .road-phase:nth-child(2) { border-color: #0891b2; }
+    .road-phase:nth-child(3) { border-color: #16a34a; }
+    .road-title {
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #133C65;
+      margin-bottom: 0.15rem;
+    }
+    .road-phase:nth-child(2) .road-title { color: #0891b2; }
+    .road-phase:nth-child(3) .road-title { color: #16a34a; }
+    .road-period {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      margin-bottom: 0.75rem;
+    }
+    .road-items {
+      list-style: none;
+      font-size: 0.83rem;
+      color: #374151;
+    }
+    .road-items li { padding: 0.2rem 0; }
+    .road-items li::before { content: '→ '; color: #94a3b8; }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    @media (max-width: 600px) {
+      .page { padding: 1rem; }
+      .header { padding: 1.5rem 1.25rem; }
+      .header h1 { font-size: 1.4rem; }
+      section { padding: 1.25rem; }
+      .header-meta { flex-wrap: wrap; gap: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-badge">Documento interno</div>
+    <h1>CoopeSaaS — Modelo de Negocio</h1>
+    <p>Estrategia comercial, estructura de precios y proyección de ingresos</p>
+    <div class="header-meta">
+      <span>Preparado: junio 2026</span>
+      <span>Versión: 1.0</span>
+      <span>Confidencial</span>
+    </div>
+  </div>
+
+  <!-- 1. Mercado -->
+  <section>
+    <div class="section-title">
+      <div class="section-icon">📊</div>
+      Análisis de mercado — Costa Rica
+    </div>
+    <p style="font-size:0.88rem;color:#64748b;margin-bottom:1.25rem;">
+      Fuente: Censo Cooperativo INFOCOOP 2008. El mercado objetivo está claramente concentrado en el segmento pequeño.
+    </p>
+    <div class="stats-grid">
+      <div class="stat-card highlight">
+        <span class="stat-num">137</span>
+        <div class="stat-label">Cooperativas &lt;200 asociados<br><strong>Segmento principal</strong></div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">37</span>
+        <div class="stat-label">Cooperativas 200–500 asociados</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">9</span>
+        <div class="stat-label">Cooperativas 500+ asociados</div>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">183</span>
+        <div class="stat-label">Total censadas<br>(2008, creció desde entonces)</div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Tamaño</th>
+          <th>Cantidad</th>
+          <th>% del mercado</th>
+          <th>Plan objetivo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="focus-row">
+          <td>Menos de 200 asociados <span class="focus-tag">FOCO</span></td>
+          <td>137</td>
+          <td>74.8%</td>
+          <td>Básico</td>
+        </tr>
+        <tr>
+          <td>200 a menos de 500</td>
+          <td>37</td>
+          <td>20.2%</td>
+          <td>Pro</td>
+        </tr>
+        <tr>
+          <td>500 a menos de 1,000</td>
+          <td>8</td>
+          <td>4.4%</td>
+          <td>Empresas</td>
+        </tr>
+        <tr>
+          <td>Más de 1,000</td>
+          <td>1</td>
+          <td>0.5%</td>
+          <td>Empresas</td>
+        </tr>
+        <tr class="total-row">
+          <td>Total</td>
+          <td>183</td>
+          <td>100%</td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 2. Precios -->
+  <section>
+    <div class="section-title">
+      <div class="section-icon">💳</div>
+      Estructura de precios
+    </div>
+    <p style="font-size:0.88rem;color:#64748b;margin-bottom:1.5rem;">
+      El plan Básico está calculado en <strong>~$0.23 por asociado/mes</strong> para cooperativas de 200 personas — un costo fácilmente justificable ante cualquier junta directiva.
+    </p>
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <div class="badge">★ Segmento principal</div>
+        <div class="plan-name">Básico</div>
+        <div class="plan-price">$45<span>/mes</span></div>
+        <div class="plan-assoc">Hasta 200 asociados · ~¢23,175/mes</div>
+        <ul class="plan-features">
+          <li>Gestión de asociados</li>
+          <li>Órganos sociales</li>
+          <li>Asambleas y actas</li>
+          <li>Módulo de votaciones</li>
+          <li>Soporte por correo</li>
+        </ul>
+        <div class="plan-target">Dirigido a las 137 cooperativas pequeñas</div>
+      </div>
+      <div class="price-card">
+        <div class="plan-name">Pro</div>
+        <div class="plan-price">$109<span>/mes</span></div>
+        <div class="plan-assoc">Hasta 500 asociados · ~¢56,135/mes</div>
+        <ul class="plan-features">
+          <li>Todo lo del plan Básico</li>
+          <li>Reportes avanzados</li>
+          <li>Multi-usuario y roles</li>
+          <li>Exportación de datos</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <div class="plan-target">Dirigido a las 37 cooperativas medianas</div>
+      </div>
+      <div class="price-card">
+        <div class="plan-name">Empresas</div>
+        <div class="plan-price">$229<span>/mes</span></div>
+        <div class="plan-assoc">Asociados ilimitados</div>
+        <ul class="plan-features">
+          <li>Todo lo del plan Pro</li>
+          <li>Personalización de marca</li>
+          <li>API de integración</li>
+          <li>Capacitación incluida</li>
+          <li>Soporte dedicado</li>
+        </ul>
+        <div class="plan-target">Dirigido a las 9 cooperativas grandes</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2rem;padding:1rem 1.2rem;background:#f0fdf4;border-radius:8px;border:1px solid #bbf7d0;">
+      <strong style="font-size:0.88rem;color:#166534;">Incentivo de pago anual (recomendado)</strong>
+      <p style="font-size:0.84rem;color:#166534;margin-top:0.3rem;">Ofrecer 2 meses gratis con pago anual anticipado mejora el flujo de caja y reduce la cancelación. Ejemplo: Básico anual = $450/año en lugar de $540.</p>
+    </div>
+  </section>
+
+  <!-- 3. Proyección -->
+  <section>
+    <div class="section-title">
+      <div class="section-icon">📈</div>
+      Proyección de ingresos mensuales recurrentes (MRR)
+    </div>
+    <p style="font-size:0.88rem;color:#64748b;margin-bottom:1.25rem;">
+      Escenarios basados únicamente en las 137 cooperativas pequeñas (Plan Básico a $45/mes):
+    </p>
+    <div class="projection-grid">
+      <div class="proj-card conservador">
+        <div class="proj-scenario">Conservador</div>
+        <div class="proj-conversion">10% → 14 cooperativas</div>
+        <div class="proj-amount">$630</div>
+        <div class="proj-sub">por mes</div>
+      </div>
+      <div class="proj-card realista">
+        <div class="proj-scenario">Realista</div>
+        <div class="proj-conversion">25% → 34 cooperativas</div>
+        <div class="proj-amount">$1,530</div>
+        <div class="proj-sub">por mes</div>
+      </div>
+      <div class="proj-card optimista">
+        <div class="proj-scenario">Optimista</div>
+        <div class="proj-conversion">40% → 55 cooperativas</div>
+        <div class="proj-amount">$2,475</div>
+        <div class="proj-sub">por mes</div>
+      </div>
+    </div>
+
+    <div class="growth-note">
+      <strong>Suma con los demás segmentos (escenario realista a 12 meses)</strong>
+      34 coops Básico ($45) + 7 coops Pro ($109) + 1 Empresas ($229) =
+      <strong>$1,530 + $763 + $229 = $2,522/mes recurrentes entre 3 personas</strong>
+    </div>
+  </section>
+
+  <!-- 4. Estrategia de captación -->
+  <section>
+    <div class="section-title">
+      <div class="section-icon">🎯</div>
+      Estrategia de captación de clientes
+    </div>
+    <ol class="strategy-list">
+      <li>
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <strong>Cliente piloto gratuito (6 meses)</strong>
+          <p>Seleccionar 1–2 cooperativas conocidas y darles el sistema sin costo a cambio de retroalimentación continua y un caso de éxito documentado.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <strong>Demo en vivo como herramienta principal de ventas</strong>
+          <p>El sistema ya tiene un demo funcional en línea. Presentarlo en reuniones presenciales con juntas directivas es más efectivo que cualquier folleto.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <strong>Alianza con INFOCOOP</strong>
+          <p>Presentar el sistema ante INFOCOOP. Una recomendación institucional puede generar referidos masivos al mercado objetivo de 137 cooperativas.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <strong>Prueba gratuita 30 días sin tarjeta</strong>
+          <p>Eliminar la fricción de entrada. Las cooperativas deben poder probar sin comprometerse. La migración de datos desde Excel debe estar incluida.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <strong>Programa de referidos entre cooperativas</strong>
+          <p>Las cooperativas se consultan entre sí antes de adoptar cualquier sistema. Un descuento por referir a otra cooperativa aprovecha esa red natural.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- 5. Hoja de ruta -->
+  <section>
+    <div class="section-title">
+      <div class="section-icon">🗺</div>
+      Hoja de ruta de productos
+    </div>
+    <p style="font-size:0.88rem;color:#64748b;margin-bottom:1.25rem;">
+      Recomendación: un producto a la vez, pero con arquitectura compartida que permita lanzar los siguientes en menos tiempo.
+    </p>
+    <div class="roadmap">
+      <div class="road-phase">
+        <div class="road-title">CoopeSaaS</div>
+        <div class="road-period">Mes 1–6 · Ahora</div>
+        <ul class="road-items">
+          <li>Demo funcional listo</li>
+          <li>Captar primeros 10 clientes</li>
+          <li>Validar precio $29/mes</li>
+          <li>Documentar caso de éxito</li>
+        </ul>
+      </div>
+      <div class="road-phase">
+        <div class="road-title">AsadaSaaS</div>
+        <div class="road-period">Mes 6–12</div>
+        <ul class="road-items">
+          <li>~1,500 ASADAS en CR</li>
+          <li>Reutilizar 70% del código</li>
+          <li>Módulos de tarifas y agua</li>
+          <li>Mercado poco competido</li>
+        </ul>
+      </div>
+      <div class="road-phase">
+        <div class="road-title">EduSaaS</div>
+        <div class="road-period">Mes 12–18</div>
+        <ul class="road-items">
+          <li>Mercado más competido</li>
+          <li>Enfocar en escuelas CTP</li>
+          <li>Reutilizar core del sistema</li>
+          <li>Diferenciador: idioma y normativa CR</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    CoopeSaaS · Documento de uso interno · Junio 2026
+  </div>
+
+</div>
+</body>
+</html>

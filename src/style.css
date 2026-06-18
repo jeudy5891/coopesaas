@@ -32,7 +32,7 @@
   --shadow-sm: 0 1px 4px rgba(19, 60, 101, 0.06);
 
   --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-ui: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-ui: 'Segoe UI', system-ui, -apple-system, sans-serif;
   --surface: #F4F6F8;
 
   --transition: all 0.2s ease;

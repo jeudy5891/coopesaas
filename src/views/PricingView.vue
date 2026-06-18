@@ -64,12 +64,12 @@
               <div class="plan-desc">Ideal para cooperativas pequeñas que están comenzando su digitalización.</div>
             </div>
             <div class="plan-price-wrap">
-              <span class="plan-price">${{ billing === 'anual' ? '24' : '29' }}</span>
+              <span class="plan-price">${{ billing === 'anual' ? '37' : '45' }}</span>
               <span class="plan-period">/mes</span>
             </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $290/año · ahorras $58</div>
+            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $450/año · ahorras $90</div>
             <div v-else class="plan-annual-note">&nbsp;</div>
-            <div class="plan-limit">Hasta 200 asociados · ~¢{{ billing === 'anual' ? '12,400' : '15,000' }}/mes</div>
+            <div class="plan-limit">Hasta 200 asociados · ~¢{{ billing === 'anual' ? '19,055' : '23,175' }}/mes</div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Incluye:</div>
             <ul class="plan-features">
@@ -90,12 +90,12 @@
               <div class="plan-desc">Para cooperativas en crecimiento con necesidades más avanzadas.</div>
             </div>
             <div class="plan-price-wrap">
-              <span class="plan-price">${{ billing === 'anual' ? '58' : '69' }}</span>
+              <span class="plan-price">${{ billing === 'anual' ? '90' : '109' }}</span>
               <span class="plan-period">/mes</span>
             </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $696/año · ahorras $132</div>
+            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $1,090/año · ahorras $218</div>
             <div v-else class="plan-annual-note">&nbsp;</div>
-            <div class="plan-limit">Hasta 500 asociados · ~¢{{ billing === 'anual' ? '29,900' : '35,500' }}/mes</div>
+            <div class="plan-limit">Hasta 500 asociados · ~¢{{ billing === 'anual' ? '46,350' : '56,135' }}/mes</div>
             <RouterLink to="/" class="plan-cta plan-cta--primary">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Básico, más:</div>
             <ul class="plan-features">
@@ -115,10 +115,10 @@
               <div class="plan-desc">Para cooperativas grandes con requerimientos especiales y múltiples usuarios.</div>
             </div>
             <div class="plan-price-wrap">
-              <span class="plan-price">${{ billing === 'anual' ? '124' : '149' }}</span>
+              <span class="plan-price">${{ billing === 'anual' ? '190' : '229' }}</span>
               <span class="plan-period">/mes</span>
             </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $1,488/año · ahorras $300</div>
+            <div v-if="billing === 'anual'" class="plan-annual-note">Facturado $2,290/año · ahorras $458</div>
             <div v-else class="plan-annual-note">&nbsp;</div>
             <div class="plan-limit">Asociados ilimitados</div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
