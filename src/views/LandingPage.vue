@@ -2,7 +2,7 @@
   <div class="landing">
 
     <!-- NAVBAR -->
-    <nav class="navbar" :class="{ 'navbar--solid': isScrolled }">
+    <nav class="navbar" :class="{ 'navbar--solid': isScrolled || menuOpen }">
       <div class="nav-inner">
         <RouterLink to="/" class="nav-logo">
           <img src="/icono.png" alt="CoopeSaaS" class="nav-logo-icon" />
@@ -18,6 +18,22 @@
         <div class="nav-actions">
           <RouterLink to="/login" class="btn-ghost-sm">Iniciar sesión</RouterLink>
           <button class="btn-primary-sm" @click="demoOpen = true">Solicitar Demo</button>
+        </div>
+        <button class="nav-menu-btn" @click="menuOpen = !menuOpen" aria-label="Menú">
+          <svg v-if="!menuOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <!-- Mobile menu -->
+      <div class="mobile-menu" :class="{ 'mobile-menu--open': menuOpen }">
+        <a href="#modulos"        @click="menuOpen = false">Módulos</a>
+        <a href="#beneficios"     @click="menuOpen = false">Beneficios</a>
+        <a href="#como-funciona"  @click="menuOpen = false">Cómo funciona</a>
+        <RouterLink to="/precios" @click="menuOpen = false">Precios</RouterLink>
+        <RouterLink to="/nosotros" @click="menuOpen = false">Nosotros</RouterLink>
+        <div class="mobile-menu-actions">
+          <RouterLink to="/login" class="btn-ghost-sm" @click="menuOpen = false">Iniciar sesión</RouterLink>
+          <button class="btn-primary-sm" @click="menuOpen = false; demoOpen = true">Solicitar Demo</button>
         </div>
       </div>
     </nav>
@@ -385,6 +401,7 @@ import { APPS_SCRIPT_URL } from '../config.js'
 
 const isScrolled = ref(false)
 const heroVisible = ref(false)
+const menuOpen    = ref(false)
 
 // ── Demo modal ────────────────────────────
 const demoOpen    = ref(false)
@@ -1737,6 +1754,60 @@ const steps = [
   .modal-box { padding: 24px 20px; }
 }
 
+/* ── Hamburger ──────────────────────────── */
+.nav-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  padding: 6px;
+  margin-left: auto;
+  border-radius: 8px;
+  transition: background 0.15s;
+  align-items: center;
+  justify-content: center;
+}
+.nav-menu-btn:hover { background: var(--navy-light); }
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: white;
+  border-top: 1px solid var(--border);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s;
+  padding: 0;
+}
+.mobile-menu--open {
+  max-height: 500px;
+  padding: 8px 0 20px;
+}
+.mobile-menu a {
+  display: block;
+  padding: 13px 28px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s, background 0.15s;
+}
+.mobile-menu a:hover { color: var(--navy); background: var(--navy-light); }
+.mobile-menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 28px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.mobile-menu-actions .btn-ghost-sm,
+.mobile-menu-actions .btn-primary-sm {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
 /* ── Responsive ─────────────────────────── */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -1748,15 +1819,46 @@ const steps = [
 }
 
 @media (max-width: 768px) {
-  .nav-links { display: none; }
-  .modules-grid { grid-template-columns: 1fr; }
-  .steps-grid { grid-template-columns: 1fr; }
-  .hero { padding: 100px 0 60px; }
-  .section-wrap { padding: 0 20px; }
+  /* Navbar */
+  .nav-links   { display: none; }
+  .nav-actions { display: none; }
+  .nav-menu-btn { display: flex; }
+  .mobile-menu  { display: flex; }
+
+  /* Hero */
+  .hero { padding: 100px 0 56px; min-height: auto; }
   .hero-inner { padding: 0 20px; }
-  .stats-inner { padding: 0 20px; gap: 32px; }
+  .hero-title { font-size: 34px; letter-spacing: -0.5px; }
+  .hero-desc  { font-size: 15px; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .btn-hero-primary,
+  .btn-hero-ghost { text-align: center; justify-content: center; }
+  .hero-proof { flex-wrap: wrap; }
+
+  /* Sections */
+  .section-wrap { padding: 0 20px; }
+  .stats-inner  { padding: 0 20px; gap: 28px; flex-wrap: wrap; }
+  .stat-item strong { font-size: 22px; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .steps-grid   { grid-template-columns: 1fr; }
+  .modules    { padding: 72px 0; }
+  .benefits   { padding: 72px 0; }
+  .how-works  { padding: 72px 0; }
+  .cta-section { padding: 72px 0; }
+  .section-header { margin-bottom: 36px; }
+
+  /* Footer */
+  .footer-main   { padding: 0 20px 40px; }
+  .footer-nav    { flex-wrap: wrap; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-  .footer-nav { flex-wrap: wrap; gap: 32px; }
-  .footer-main { padding: 0 20px 40px; }
+}
+
+@media (max-width: 480px) {
+  .hero-title   { font-size: 28px; }
+  .hero-badge   { font-size: 11px; padding: 6px 12px; }
+  .module-card  { padding: 22px; }
+  .cta-title    { font-size: 26px; }
+  .stat-item    { min-width: 100px; }
+  .float-top, .float-bottom { display: none; }
 }
 </style>
