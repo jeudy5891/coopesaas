@@ -267,7 +267,8 @@ function renderCell(val) {
 
 const compareRows = [
   { feature: 'Gestión de asociados',     basico: 'Hasta 200', pro: 'Hasta 500',  empresas: 'Ilimitados' },
-  { feature: 'Usuarios del sistema',     basico: '1',         pro: 'Hasta 5',    empresas: 'Ilimitados' },
+  { feature: 'Usuarios del sistema',     basico: '5',         pro: '10',         empresas: 'Ilimitados' },
+  { feature: 'Gestión de personal',      basico: true,        pro: true,         empresas: true },
   { feature: 'Órganos sociales',         basico: true,        pro: true,         empresas: true },
   { feature: 'Asambleas y actas',        basico: true,        pro: true,         empresas: true },
   { feature: 'Módulo de votaciones',     basico: true,        pro: true,         empresas: true },

@@ -218,22 +218,19 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
 
 const team = [
   {
-    name: 'Jeudy Paniagua',
-    initials: 'JP',
+    initials: 'MM',
     color: '#133C65',
     role: 'Co-fundador · Desarrollo Full Stack',
     bio: 'Desarrollador con experiencia en sistemas de gestión institucional. Lidera la arquitectura del producto y el desarrollo de los módulos principales.',
   },
   {
-    name: 'Socio Fundador',
-    initials: 'SF',
+    initials: 'VS',
     color: '#1A9152',
-    role: 'Co-fundador · Backend & Infraestructura',
+    role: 'Co-fundador · Seguridad & Infraestructura',
     bio: 'Especialista en bases de datos y servicios en la nube. Garantiza la seguridad, disponibilidad y escalabilidad de la plataforma.',
   },
   {
-    name: 'Socio Fundador',
-    initials: 'SF',
+    initials: 'JP',
     color: '#C47F0C',
     role: 'Co-fundador · Frontend & UX',
     bio: 'Diseñador y desarrollador frontend enfocado en la experiencia de usuario. Asegura que la plataforma sea intuitiva para cualquier perfil de usuario.',
