@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from '../views/LandingPage.vue'
 import LoginPage from '../views/LoginPage.vue'
+import PricingView from '../views/PricingView.vue'
+import AboutView from '../views/AboutView.vue'
 import DashboardLayout from '../layouts/DashboardLayout.vue'
 import DashboardHome from '../views/DashboardHome.vue'
 import PersonalView from '../views/PersonalView.vue'
@@ -14,6 +16,8 @@ import RolesView from '../views/RolesView.vue'
 
 const routes = [
   { path: '/', component: LandingPage, meta: { title: 'CoopeSaaS — Gestión Cooperativa' } },
+  { path: '/precios', component: PricingView, meta: { title: 'Precios — CoopeSaaS' } },
+  { path: '/nosotros', component: AboutView, meta: { title: 'Nosotros — CoopeSaaS' } },
   { path: '/login', component: LoginPage, meta: { title: 'Iniciar sesión — CoopeSaaS' } },
   {
     path: '/dashboard',

@@ -12,6 +12,8 @@
           <a href="#modulos">Módulos</a>
           <a href="#beneficios">Beneficios</a>
           <a href="#como-funciona">Cómo funciona</a>
+          <RouterLink to="/precios">Precios</RouterLink>
+          <RouterLink to="/nosotros">Nosotros</RouterLink>
         </div>
         <div class="nav-actions">
           <RouterLink to="/login" class="btn-ghost-sm">Iniciar sesión</RouterLink>
@@ -265,12 +267,12 @@
             <h5>Producto</h5>
             <a href="#modulos">Módulos</a>
             <a href="#beneficios">Beneficios</a>
-            <a href="#como-funciona">Cómo funciona</a>
+            <RouterLink to="/precios">Precios</RouterLink>
           </div>
           <div class="footer-col">
             <h5>Empresa</h5>
-            <a href="#">Acerca de</a>
-            <a href="#">Contacto</a>
+            <RouterLink to="/nosotros">Acerca de</RouterLink>
+            <a href="mailto:contacto@coopesaas.com">Contacto</a>
           </div>
           <div class="footer-col">
             <h5>Legal</h5>
