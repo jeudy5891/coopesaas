@@ -1750,8 +1750,20 @@ const steps = [
 .modal-fade-leave-to .modal-box { transform: translateY(8px) scale(0.98); }
 
 @media (max-width: 600px) {
+  .modal-backdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal-box {
+    padding: 24px 18px 32px;
+    border-radius: 20px 20px 0 0;
+    max-width: 100%;
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
   .demo-row { grid-template-columns: 1fr; }
-  .modal-box { padding: 24px 20px; }
+  .modal-title { font-size: 20px; }
+  .modal-header { margin-bottom: 20px; }
 }
 
 /* ── Hamburger ──────────────────────────── */
