@@ -2,7 +2,7 @@
   <div class="app-shell" :class="{ dark: isDark }">
 
     <!-- ─── SIDEBAR ─── -->
-    <aside class="sidebar" :class="{ 'sidebar--open': mobileOpen }">
+    <aside class="sidebar" :class="{ 'sidebar--open': mobileOpen, 'sidebar--collapsed': sidebarCollapsed }">
 
       <!-- Brand -->
       <div class="sidebar-brand">
@@ -10,6 +10,9 @@
           <img src="/icono-blanco.png" alt="" class="brand-icon" />
           <span class="brand-name">CoopeSaaS</span>
         </RouterLink>
+        <button class="sidebar-toggle" @click="toggleSidebar" title="Contraer menú">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
       </div>
 
       <!-- Navigation -->
@@ -168,7 +171,7 @@
     </aside>
 
     <!-- ─── MAIN AREA ─── -->
-    <div class="main-area">
+    <div class="main-area" :class="{ 'main-area--collapsed': sidebarCollapsed }">
 
       <!-- Mobile topbar -->
       <div class="mobile-header">
@@ -210,6 +213,12 @@ const { isAdmin, isOperador, isAsociado, isConsejo, roleInfo } = useRole()
 const isDark = ref(false)
 const mobileOpen = ref(false)
 const configOpen = ref(false)
+const sidebarCollapsed = ref(false)
+
+function toggleSidebar() {
+  sidebarCollapsed.value = !sidebarCollapsed.value
+  localStorage.setItem('coopesaas-sidebar', sidebarCollapsed.value ? '1' : '0')
+}
 
 function isActive(path) {
   return route.path.startsWith(path)
@@ -249,10 +258,9 @@ function logout() {
 
 onMounted(() => {
   const saved = localStorage.getItem('coopesaas-dark')
-  if (saved === '1') {
-    isDark.value = true
-    document.documentElement.classList.add('dark')
-  }
+  if (saved === '1') { isDark.value = true; document.documentElement.classList.add('dark') }
+  const savedSidebar = localStorage.getItem('coopesaas-sidebar')
+  if (savedSidebar === '1') sidebarCollapsed.value = true
 })
 
 onUnmounted(() => {
@@ -280,14 +288,19 @@ onUnmounted(() => {
   left: 0;
   bottom: 0;
   z-index: 200;
-  transition: transform 0.25s ease;
+  transition: transform 0.25s ease, width 0.25s ease;
+  overflow: hidden;
 }
 
 /* ── Brand ──────────────────────────────── */
 .sidebar-brand {
-  padding: 20px 20px 16px;
+  padding: 14px 16px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .brand-link {
@@ -295,7 +308,24 @@ onUnmounted(() => {
   align-items: center;
   gap: 10px;
   text-decoration: none;
+  min-width: 0;
+  flex: 1;
 }
+
+.sidebar-toggle {
+  width: 30px; height: 30px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: rgba(255,255,255,0.65);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.sidebar-toggle:hover { background: rgba(255,255,255,0.2); color: white; }
 
 .brand-icon {
   width: 32px;
@@ -554,6 +584,23 @@ onUnmounted(() => {
   color: #FF8080;
 }
 
+/* ── Sidebar collapsed (desktop) ────────── */
+.sidebar--collapsed { width: 64px; }
+.sidebar--collapsed .brand-name { display: none; }
+.sidebar--collapsed .sidebar-toggle { margin: 0 auto; }
+.sidebar--collapsed .brand-link { flex: 0; }
+.sidebar--collapsed .nav-label { display: none; }
+.sidebar--collapsed .nav-section-label { display: none; }
+.sidebar--collapsed .nav-chevron { display: none; }
+.sidebar--collapsed .nav-sub { display: none; }
+.sidebar--collapsed .nav-item { justify-content: center; padding: 10px 0; }
+.sidebar--collapsed .nav-item--expandable { justify-content: center; }
+.sidebar--collapsed .mode-row { justify-content: center; }
+.sidebar--collapsed .mode-label { display: none; }
+.sidebar--collapsed .user-details { display: none; }
+.sidebar--collapsed .user-card { justify-content: center; gap: 0; flex-direction: column; }
+.sidebar--collapsed .logout-btn { margin-left: 0; margin-top: 4px; }
+
 /* ── Main area ──────────────────────────── */
 .main-area {
   margin-left: 260px;
@@ -561,7 +608,10 @@ onUnmounted(() => {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  transition: margin-left 0.25s ease;
 }
+
+.main-area--collapsed { margin-left: 64px; }
 
 /* ── Page content ───────────────────────── */
 .page-content {
@@ -628,9 +678,10 @@ onUnmounted(() => {
 
 /* ── Responsive ─────────────────────────── */
 @media (max-width: 900px) {
-  .sidebar { transform: translateX(-100%); }
+  .sidebar { transform: translateX(-100%); width: 260px !important; }
   .sidebar--open { transform: translateX(0); }
-  .main-area { margin-left: 0; }
+  .sidebar-toggle { display: none; }
+  .main-area { margin-left: 0 !important; }
   .mobile-header { display: flex; }
   .page-content { padding: 16px; }
 }
