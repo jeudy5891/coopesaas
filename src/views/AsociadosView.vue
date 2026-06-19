@@ -1478,4 +1478,12 @@ const filteredComms = computed(() => {
   .exp-grid { grid-template-columns: 1fr; }
   .kpi-row { gap: 10px; }
 }
+@media (max-width: 768px) {
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .page-header .btn-primary { width: 100%; justify-content: center; }
+  .data-card { overflow-x: auto; }
+  .frow { grid-template-columns: 1fr !important; }
+  .filter-bar { flex-wrap: wrap; gap: 8px; }
+  .filter-bar input, .filter-bar select { width: 100%; }
+}
 </style>

@@ -1953,4 +1953,12 @@ const visibleCapacitaciones  = computed(() => isOperador.value ? capacitaciones.
   .form-row { grid-template-columns: 1fr; }
   .comp-item { flex-direction: column; align-items: flex-start; gap: 6px; }
 }
+@media (max-width: 768px) {
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .page-header .btn-primary { width: 100%; justify-content: center; }
+  .data-card { overflow-x: auto; }
+  .tab-list { overflow-x: auto; white-space: nowrap; padding-bottom: 2px; }
+  .tab-list::-webkit-scrollbar { height: 0; }
+  .modal-body, .modal-box { padding: 16px !important; }
+}
 </style>

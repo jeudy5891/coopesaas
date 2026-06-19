@@ -608,4 +608,13 @@ function deleteActa(acta) {
 /* ── Transitions ────────────────────────── */
 .dropdown-fade-enter-active, .dropdown-fade-leave-active { transition: opacity 0.12s ease, transform 0.12s ease; }
 .dropdown-fade-enter-from, .dropdown-fade-leave-to { opacity: 0; transform: translateY(-4px); }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .page-header .btn-primary { width: 100%; justify-content: center; }
+  .data-card { overflow-x: auto; }
+  .organs-grid { grid-template-columns: 1fr; }
+  .detail-two-col { grid-template-columns: 1fr; }
+}
 </style>

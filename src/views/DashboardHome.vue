@@ -531,5 +531,8 @@ function formatEventDate(dateStr) {
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .bottom-grid { grid-template-columns: 1fr; }
   .home-card:last-child { grid-column: auto; }
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .cal-grid-wrap, .calendar-grid { overflow-x: auto; }
+  .activity-item { flex-wrap: wrap; }
 }
 </style>

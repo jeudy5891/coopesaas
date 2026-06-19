@@ -170,6 +170,18 @@
     <!-- ─── MAIN AREA ─── -->
     <div class="main-area">
 
+      <!-- Mobile topbar -->
+      <div class="mobile-header">
+        <button class="mobile-menu-btn" @click="mobileOpen = !mobileOpen">
+          <svg v-if="!mobileOpen" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg v-else width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <RouterLink to="/dashboard" class="mobile-brand">
+          <img src="/icono.png" alt="CoopeSaaS" class="mobile-brand-icon" />
+          <span><strong>Coope</strong>SaaS</span>
+        </RouterLink>
+      </div>
+
       <!-- Page content -->
       <main class="page-content">
         <RouterView />
@@ -572,16 +584,54 @@ onUnmounted(() => {
 .fade-enter-active, .fade-leave-active { transition: opacity 0.2s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 
+/* ── Mobile topbar ──────────────────────── */
+.mobile-header {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  height: 52px;
+  background: white;
+  border-bottom: 1px solid #E8EEF4;
+  position: sticky;
+  top: 0;
+  z-index: 150;
+  flex-shrink: 0;
+}
+.dark .mobile-header { background: #1D293D; border-color: #3D5069; }
+
+.mobile-menu-btn {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  background: #F4F6F8;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #133C65;
+  flex-shrink: 0;
+}
+.dark .mobile-menu-btn { background: #243553; color: #93B8D8; }
+
+.mobile-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #133C65;
+  font-size: 16px;
+  font-weight: 500;
+}
+.dark .mobile-brand { color: #E2E8F0; }
+.mobile-brand-icon { width: 26px; height: 26px; object-fit: contain; }
+
 /* ── Responsive ─────────────────────────── */
 @media (max-width: 900px) {
-  .sidebar {
-    transform: translateX(-100%);
-  }
-  .sidebar--open {
-    transform: translateX(0);
-  }
-  .main-area {
-    margin-left: 0;
-  }
+  .sidebar { transform: translateX(-100%); }
+  .sidebar--open { transform: translateX(0); }
+  .main-area { margin-left: 0; }
+  .mobile-header { display: flex; }
+  .page-content { padding: 16px; }
 }
 </style>

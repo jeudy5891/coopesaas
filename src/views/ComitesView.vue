@@ -798,4 +798,15 @@ function clearSlot(slot) {
 .modal-fade-enter-from, .modal-fade-leave-to { opacity: 0; }
 .dropdown-fade-enter-active, .dropdown-fade-leave-active { transition: opacity 0.12s ease, transform 0.12s ease; }
 .dropdown-fade-enter-from, .dropdown-fade-leave-to { opacity: 0; transform: translateY(-4px); }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .header-actions { width: 100%; display: flex; gap: 8px; }
+  .header-actions .btn-primary { flex: 1; justify-content: center; }
+  .data-card { overflow-x: auto; }
+  .form-row { grid-template-columns: 1fr; }
+  .cell-objetivo { max-width: 120px; }
+  .new-slot-row { grid-template-columns: 1fr 1fr 28px; }
+}
 </style>

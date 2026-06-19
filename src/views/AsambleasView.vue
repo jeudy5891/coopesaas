@@ -1571,4 +1571,17 @@ const votacionesResultados = [
 }
 .dark .votaciones-notice { background: rgba(147,184,216,0.1); border-color: #3D5069; color: #93B8D8; }
 .votacion-resultado-group { margin-bottom: 20px; }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .page-header .btn-primary, .page-header .btn-outline { width: 100%; justify-content: center; }
+  .data-card { overflow-x: auto; }
+  .form-row { grid-template-columns: 1fr; }
+  .stepper { overflow-x: auto; padding-bottom: 6px; }
+  .stepper::-webkit-scrollbar { height: 0; }
+  .step-label { font-size: 10px; white-space: nowrap; }
+  .wizard-body { padding: 16px; }
+  .mini-steps { flex-wrap: wrap; gap: 2px; }
+}
 </style>

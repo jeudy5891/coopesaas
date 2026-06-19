@@ -1977,4 +1977,14 @@ function photoSrc(path) {
 .dark .vote-election-title { color: #a0c4e8; }
 .dark .cand-name { color: #dde8f4; }
 .dark .vote-done { background: #1a2b3c; }
+
+/* ── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+  .mode-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+  .mode-tabs::-webkit-scrollbar { height: 0; }
+  .mode-tab { flex-shrink: 0; }
+  .dash-columns { grid-template-columns: 1fr; }
+  .dash-left, .dash-right { min-width: 0; }
+  .page-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+}
 </style>
