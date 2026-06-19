@@ -11,7 +11,7 @@
         <div class="nav-links">
           <RouterLink to="/#modulos">Módulos</RouterLink>
           <RouterLink to="/#beneficios">Beneficios</RouterLink>
-          <RouterLink to="/precios">Precios</RouterLink>
+          <RouterLink to="/precios">Planes</RouterLink>
           <RouterLink to="/nosotros">Nosotros</RouterLink>
         </div>
         <div class="nav-actions">
@@ -36,19 +36,12 @@
     <section class="page-hero">
       <div class="hero-dots"></div>
       <div class="section-wrap">
-        <div class="section-tag">Planes y precios</div>
-        <h1 class="page-hero-title">Un plan para cada cooperativa</h1>
+        <div class="section-tag">Planes</div>
+        <h1 class="page-hero-title">Elige el plan ideal para tu cooperativa</h1>
         <p class="page-hero-sub">
-          Precios simples y transparentes. Sin contratos de largo plazo,
-          sin cargos ocultos. Cancela cuando quieras.
+          Módulos diseñados para la gestión cooperativa. Sin contratos de largo plazo,
+          sin cargos ocultos. 30 días de prueba gratuita.
         </p>
-        <div class="billing-toggle">
-          <button :class="{ active: billing === 'mensual' }" @click="billing = 'mensual'">Mensual</button>
-          <button :class="{ active: billing === 'anual' }" @click="billing = 'anual'">
-            Anual
-            <span class="discount-badge">2 meses gratis</span>
-          </button>
-        </div>
       </div>
     </section>
 
@@ -63,50 +56,34 @@
               <div class="plan-name">Básico</div>
               <div class="plan-desc">Ideal para cooperativas pequeñas que están comenzando su digitalización.</div>
             </div>
-            <div class="plan-price-wrap">
-              <span class="plan-price">${{ billing === 'anual' ? '37' : '45' }}</span>
-              <span class="plan-period">/mes</span>
-            </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Ahorras $90</div>
-            <div v-else class="plan-annual-note">&nbsp;</div>
-            <div class="plan-limit">Hasta 200 asociados · ~¢{{ billing === 'anual' ? '19,055' : '23,175' }}/mes</div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Incluye:</div>
             <ul class="plan-features">
-              <li>Gestión de asociados (hasta 200)</li>
-              <li>Órganos sociales y juntas</li>
-              <li>Asambleas y actas digitales</li>
-              <li>Módulo de votaciones</li>
               <li>Gestión de personal</li>
+              <li>Gestión de asociados (hasta 200)</li>
               <li>5 usuarios del sistema</li>
-              <li>Soporte por correo electrónico</li>
+              <li>Órganos sociales</li>
+              <li>Asambleas</li>
+              <li>Votación</li>
+              <li>Migración de datos</li>
             </ul>
           </div>
 
           <!-- Pro -->
           <div class="plan-card plan-card--featured">
-            <div class="plan-featured-badge">Más popular</div>
+            <div class="plan-featured-badge">Más completo</div>
             <div class="plan-header">
               <div class="plan-name">Pro</div>
               <div class="plan-desc">Para cooperativas en crecimiento con necesidades más avanzadas.</div>
             </div>
-            <div class="plan-price-wrap">
-              <span class="plan-price">${{ billing === 'anual' ? '90' : '109' }}</span>
-              <span class="plan-period">/mes</span>
-            </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Ahorras $218</div>
-            <div v-else class="plan-annual-note">&nbsp;</div>
-            <div class="plan-limit">Hasta 500 asociados · ~¢{{ billing === 'anual' ? '46,350' : '56,135' }}/mes</div>
             <RouterLink to="/" class="plan-cta plan-cta--primary">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Básico, más:</div>
             <ul class="plan-features">
               <li>Hasta 500 asociados</li>
-              <li>Reportes y estadísticas avanzadas</li>
-              <li>Gestión de personal</li>
               <li>10 usuarios del sistema</li>
-              <li>Exportación de datos (Excel/PDF)</li>
-              <li>Módulo de comités</li>
-              <li>Soporte prioritario</li>
+              <li>Gestión de Comités</li>
+              <li>Reportes avanzados</li>
+              <li>Exportar a Excel/PDF</li>
             </ul>
           </div>
 
@@ -116,23 +93,13 @@
               <div class="plan-name">Empresas</div>
               <div class="plan-desc">Para cooperativas grandes con requerimientos especiales y múltiples usuarios.</div>
             </div>
-            <div class="plan-price-wrap">
-              <span class="plan-price">${{ billing === 'anual' ? '190' : '229' }}</span>
-              <span class="plan-period">/mes</span>
-            </div>
-            <div v-if="billing === 'anual'" class="plan-annual-note">Ahorras $458</div>
-            <div v-else class="plan-annual-note">&nbsp;</div>
-            <div class="plan-limit">Asociados ilimitados</div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Pro, más:</div>
             <ul class="plan-features">
               <li>Asociados ilimitados</li>
-              <li>Gestión de personal</li>
-              <li>Usuarios ilimitados</li>
+              <li>Usuarios del sistema ilimitados</li>
               <li>Personalización de marca</li>
-              <li>Capacitación del equipo incluida</li>
-              <li>Integración con sistemas externos</li>
-              <li>Soporte dedicado y SLA garantizado</li>
+              <li>Capacitación incluida</li>
             </ul>
           </div>
 
@@ -221,7 +188,7 @@
             <h5>Producto</h5>
             <RouterLink to="/#modulos">Módulos</RouterLink>
             <RouterLink to="/#beneficios">Beneficios</RouterLink>
-            <RouterLink to="/precios">Precios</RouterLink>
+            <RouterLink to="/precios">Planes</RouterLink>
           </div>
           <div class="footer-col">
             <h5>Empresa</h5>
@@ -249,7 +216,6 @@ import { ref, onMounted, onUnmounted } from 'vue'
 
 const isScrolled = ref(false)
 const menuOpen   = ref(false)
-const billing    = ref('mensual')
 const openFaq    = ref(null)
 
 function onScroll() { isScrolled.value = window.scrollY > 50 }
@@ -266,18 +232,19 @@ function renderCell(val) {
 }
 
 const compareRows = [
+  { feature: 'Gestión de personal',      basico: true,        pro: true,         empresas: true },
   { feature: 'Gestión de asociados',     basico: 'Hasta 200', pro: 'Hasta 500',  empresas: 'Ilimitados' },
   { feature: 'Usuarios del sistema',     basico: '5',         pro: '10',         empresas: 'Ilimitados' },
-  { feature: 'Gestión de personal',      basico: true,        pro: true,         empresas: true },
   { feature: 'Órganos sociales',         basico: true,        pro: true,         empresas: true },
-  { feature: 'Asambleas y actas',        basico: true,        pro: true,         empresas: true },
-  { feature: 'Módulo de votaciones',     basico: true,        pro: true,         empresas: true },
-  { feature: 'Módulo de comités',        basico: false,       pro: true,         empresas: true },
-  { feature: 'Reportes avanzados',       basico: false,       pro: true,         empresas: true },
-  { feature: 'Exportación Excel/PDF',    basico: false,       pro: true,         empresas: true },
-  { feature: 'Personalización de marca', basico: false,       pro: false,        empresas: true },
-  { feature: 'Capacitación incluida',    basico: false,       pro: false,        empresas: true },
-  { feature: 'Soporte',                  basico: 'Correo',    pro: 'Prioritario',empresas: 'Dedicado' },
+  { feature: 'Asambleas',               basico: true,        pro: true,         empresas: true },
+  { feature: 'Votación',                basico: true,        pro: true,         empresas: true },
+  { feature: 'Migración de datos',      basico: true,        pro: true,         empresas: true },
+  { feature: 'Gestión de Comités',      basico: false,       pro: true,         empresas: true },
+  { feature: 'Reportes avanzados',      basico: false,       pro: true,         empresas: true },
+  { feature: 'Exportar Excel/PDF',      basico: false,       pro: true,         empresas: true },
+  { feature: 'Personalización de marca',basico: false,       pro: false,        empresas: true },
+  { feature: 'Capacitación incluida',   basico: false,       pro: false,        empresas: true },
+  { feature: 'Soporte',                 basico: 'Correo',    pro: 'Prioritario',empresas: 'Dedicado' },
 ]
 
 const faqs = [

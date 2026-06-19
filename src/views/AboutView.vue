@@ -11,7 +11,7 @@
         <div class="nav-links">
           <RouterLink to="/#modulos">Módulos</RouterLink>
           <RouterLink to="/#beneficios">Beneficios</RouterLink>
-          <RouterLink to="/precios">Precios</RouterLink>
+          <RouterLink to="/precios">Planes</RouterLink>
           <RouterLink to="/nosotros">Nosotros</RouterLink>
         </div>
         <div class="nav-actions">
@@ -183,7 +183,7 @@
             <h5>Producto</h5>
             <RouterLink to="/#modulos">Módulos</RouterLink>
             <RouterLink to="/#beneficios">Beneficios</RouterLink>
-            <RouterLink to="/precios">Precios</RouterLink>
+            <RouterLink to="/precios">Planes</RouterLink>
           </div>
           <div class="footer-col">
             <h5>Empresa</h5>

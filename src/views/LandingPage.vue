@@ -12,7 +12,7 @@
           <a href="#modulos">Módulos</a>
           <a href="#beneficios">Beneficios</a>
           <a href="#como-funciona">Cómo funciona</a>
-          <RouterLink to="/precios">Precios</RouterLink>
+          <RouterLink to="/precios">Planes</RouterLink>
           <RouterLink to="/nosotros">Nosotros</RouterLink>
         </div>
         <div class="nav-actions">
@@ -70,7 +70,7 @@
               <div class="avatar" style="background:#7B3FA0">A</div>
               <div class="avatar" style="background:#C47F0C">J</div>
             </div>
-            <span>Más de 50 cooperativas ya confían en CoopeSaaS</span>
+            <span>Únete a las primeras cooperativas en digitalizarse</span>
           </div>
         </div>
 
@@ -283,7 +283,7 @@
             <h5>Producto</h5>
             <a href="#modulos">Módulos</a>
             <a href="#beneficios">Beneficios</a>
-            <RouterLink to="/precios">Precios</RouterLink>
+            <RouterLink to="/precios">Planes</RouterLink>
           </div>
           <div class="footer-col">
             <h5>Empresa</h5>
@@ -468,9 +468,9 @@ onUnmounted(() => {
 })
 
 const stats = [
-  { value: '+50', label: 'Cooperativas activas' },
-  { value: '+12.000', label: 'Asociados registrados' },
-  { value: '6', label: 'Módulos integrados' },
+  { value: '6', label: 'Módulos disponibles' },
+  { value: '30 días', label: 'Prueba gratuita' },
+  { value: 'Costa Rica', label: 'Enfocado en CR' },
   { value: '99.9%', label: 'Disponibilidad' },
 ]
 
