@@ -12,6 +12,7 @@ import ComitesView from '../views/ComitesView.vue'
 import AsambleasView from '../views/AsambleasView.vue'
 import VotacionesView from '../views/VotacionesView.vue'
 import FinanzasView from '../views/FinanzasView.vue'
+import CreditosView from '../views/CreditosView.vue'
 import ConfiguracionView from '../views/ConfiguracionView.vue'
 import RolesView from '../views/RolesView.vue'
 
@@ -32,6 +33,7 @@ const routes = [
       { path: 'asambleas', component: AsambleasView, meta: { title: 'Asambleas — CoopeSaaS' } },
       { path: 'votaciones', component: VotacionesView, meta: { title: 'Votaciones — CoopeSaaS' } },
       { path: 'finanzas', component: FinanzasView, meta: { title: 'Finanzas — CoopeSaaS' } },
+      { path: 'creditos', component: CreditosView, meta: { title: 'Créditos — CoopeSaaS' } },
       { path: 'configuracion', component: ConfiguracionView, meta: { title: 'Configuración — CoopeSaaS' } },
       { path: 'configuracion/roles', component: RolesView, meta: { title: 'Roles — CoopeSaaS' } },
     ],
