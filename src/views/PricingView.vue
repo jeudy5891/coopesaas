@@ -26,7 +26,7 @@
       <div class="mobile-menu" :class="{ 'mobile-menu--open': menuOpen }">
         <RouterLink to="/#modulos" @click="menuOpen = false">Módulos</RouterLink>
         <RouterLink to="/#beneficios" @click="menuOpen = false">Beneficios</RouterLink>
-        <RouterLink to="/precios" @click="menuOpen = false">Precios</RouterLink>
+        <RouterLink to="/precios" @click="menuOpen = false">Planes</RouterLink>
         <RouterLink to="/nosotros" @click="menuOpen = false">Nosotros</RouterLink>
         <RouterLink to="/login" @click="menuOpen = false">Iniciar sesión</RouterLink>
       </div>
@@ -54,52 +54,60 @@
           <div class="plan-card">
             <div class="plan-header">
               <div class="plan-name">Básico</div>
-              <div class="plan-desc">Ideal para cooperativas pequeñas que están comenzando su digitalización.</div>
+              <div class="plan-desc">Ideal para cooperativas pequeñas que inician su digitalización.</div>
             </div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
-            <div class="plan-features-label">Incluye:</div>
+            <div class="plan-features-label">Módulos incluidos:</div>
             <ul class="plan-features">
+              <li>Inicio / Dashboard</li>
               <li>Gestión de personal</li>
               <li>Gestión de asociados (hasta 200)</li>
-              <li>5 usuarios del sistema</li>
-              <li>Órganos sociales</li>
+              <li>Órganos Sociales</li>
               <li>Asambleas</li>
-              <li>Votación</li>
-              <li>Migración de datos</li>
+              <li>Configuración del sistema</li>
+              <li>5 usuarios del sistema</li>
+              <li>Migración de datos incluida</li>
+              <li>Soporte por correo</li>
             </ul>
           </div>
 
           <!-- Pro -->
           <div class="plan-card plan-card--featured">
-            <div class="plan-featured-badge">Más completo</div>
+            <div class="plan-featured-badge">Más popular</div>
             <div class="plan-header">
               <div class="plan-name">Pro</div>
-              <div class="plan-desc">Para cooperativas en crecimiento con necesidades más avanzadas.</div>
+              <div class="plan-desc">Para cooperativas en crecimiento con necesidades democráticas avanzadas.</div>
             </div>
             <RouterLink to="/" class="plan-cta plan-cta--primary">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Básico, más:</div>
             <ul class="plan-features">
+              <li>Gestión de Comités</li>
+              <li>Votaciones electrónicas</li>
               <li>Hasta 500 asociados</li>
               <li>10 usuarios del sistema</li>
-              <li>Gestión de Comités</li>
-              <li>Reportes avanzados</li>
-              <li>Exportar a Excel/PDF</li>
+              <li>Exportar a Excel / PDF</li>
+              <li>Soporte prioritario</li>
             </ul>
           </div>
 
-          <!-- Empresas -->
+          <!-- Empresarial -->
           <div class="plan-card">
             <div class="plan-header">
-              <div class="plan-name">Empresas</div>
-              <div class="plan-desc">Para cooperativas grandes con requerimientos especiales y múltiples usuarios.</div>
+              <div class="plan-name">Empresarial</div>
+              <div class="plan-desc">Para cooperativas consolidadas que requieren gestión financiera y de riesgos.</div>
             </div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Pro, más:</div>
             <ul class="plan-features">
+              <li>Módulo de Finanzas</li>
+              <li>Módulo de Créditos</li>
+              <li>Gestión de Riesgos</li>
+              <li>Reportes Gerenciales</li>
               <li>Asociados ilimitados</li>
-              <li>Usuarios del sistema ilimitados</li>
+              <li>Usuarios ilimitados</li>
               <li>Personalización de marca</li>
               <li>Capacitación incluida</li>
+              <li>Soporte dedicado</li>
             </ul>
           </div>
 
@@ -122,10 +130,10 @@
           <table class="compare-table">
             <thead>
               <tr>
-                <th class="feat-col">Funcionalidad</th>
+                <th class="feat-col">Módulo / Funcionalidad</th>
                 <th>Básico</th>
                 <th class="featured-col">Pro</th>
-                <th>Empresas</th>
+                <th>Empresarial</th>
               </tr>
             </thead>
             <tbody>
@@ -232,19 +240,24 @@ function renderCell(val) {
 }
 
 const compareRows = [
-  { feature: 'Gestión de personal',      basico: true,        pro: true,         empresas: true },
-  { feature: 'Gestión de asociados',     basico: 'Hasta 200', pro: 'Hasta 500',  empresas: 'Ilimitados' },
-  { feature: 'Usuarios del sistema',     basico: '5',         pro: '10',         empresas: 'Ilimitados' },
-  { feature: 'Órganos sociales',         basico: true,        pro: true,         empresas: true },
-  { feature: 'Asambleas',               basico: true,        pro: true,         empresas: true },
-  { feature: 'Votación',                basico: true,        pro: true,         empresas: true },
-  { feature: 'Migración de datos',      basico: true,        pro: true,         empresas: true },
-  { feature: 'Gestión de Comités',      basico: false,       pro: true,         empresas: true },
-  { feature: 'Reportes avanzados',      basico: false,       pro: true,         empresas: true },
-  { feature: 'Exportar Excel/PDF',      basico: false,       pro: true,         empresas: true },
-  { feature: 'Personalización de marca',basico: false,       pro: false,        empresas: true },
-  { feature: 'Capacitación incluida',   basico: false,       pro: false,        empresas: true },
-  { feature: 'Soporte',                 basico: 'Correo',    pro: 'Prioritario',empresas: 'Dedicado' },
+  { feature: 'Inicio / Dashboard',        basico: true,        pro: true,         empresas: true },
+  { feature: 'Personal',                  basico: true,        pro: true,         empresas: true },
+  { feature: 'Asociados',                 basico: 'Hasta 200', pro: 'Hasta 500',  empresas: 'Ilimitados' },
+  { feature: 'Órganos Sociales',          basico: true,        pro: true,         empresas: true },
+  { feature: 'Asambleas',                 basico: true,        pro: true,         empresas: true },
+  { feature: 'Comités',                   basico: false,       pro: true,         empresas: true },
+  { feature: 'Votaciones',                basico: false,       pro: true,         empresas: true },
+  { feature: 'Finanzas',                  basico: false,       pro: false,        empresas: true },
+  { feature: 'Créditos',                  basico: false,       pro: false,        empresas: true },
+  { feature: 'Riesgos',                   basico: false,       pro: false,        empresas: true },
+  { feature: 'Reportes Gerenciales',      basico: false,       pro: false,        empresas: true },
+  { feature: 'Configuración del sistema', basico: true,        pro: true,         empresas: true },
+  { feature: 'Usuarios del sistema',      basico: '5',         pro: '10',         empresas: 'Ilimitados' },
+  { feature: 'Exportar Excel / PDF',      basico: false,       pro: true,         empresas: true },
+  { feature: 'Personalización de marca',  basico: false,       pro: false,        empresas: true },
+  { feature: 'Capacitación incluida',     basico: false,       pro: false,        empresas: true },
+  { feature: 'Migración de datos',        basico: true,        pro: true,         empresas: true },
+  { feature: 'Soporte',                   basico: 'Correo',    pro: 'Prioritario',empresas: 'Dedicado' },
 ]
 
 const faqs = [

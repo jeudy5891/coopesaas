@@ -59,7 +59,7 @@
           <span class="nav-label">Órganos Sociales</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/comites" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/comites') }">
+        <RouterLink v-if="canView('comites')" to="/dashboard/comites" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/comites') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -80,7 +80,7 @@
           <span class="nav-label">Asambleas</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/votaciones" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/votaciones') }">
+        <RouterLink v-if="canView('votaciones')" to="/dashboard/votaciones" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/votaciones') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
@@ -89,7 +89,7 @@
           <span class="nav-label">Votaciones</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/finanzas" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/finanzas') }">
+        <RouterLink v-if="canView('finanzas')" to="/dashboard/finanzas" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/finanzas') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
@@ -98,7 +98,7 @@
           <span class="nav-label">Finanzas</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/creditos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/creditos') }">
+        <RouterLink v-if="canView('creditos')" to="/dashboard/creditos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/creditos') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
@@ -107,7 +107,7 @@
           <span class="nav-label">Créditos</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/riesgos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/riesgos') }">
+        <RouterLink v-if="canView('riesgos')" to="/dashboard/riesgos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/riesgos') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
@@ -117,7 +117,7 @@
           <span class="nav-label">Riesgos</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/reportes" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/reportes') }">
+        <RouterLink v-if="canView('reportes')" to="/dashboard/reportes" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/reportes') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
@@ -210,6 +210,22 @@
     <!-- ─── MAIN AREA ─── -->
     <div class="main-area" :class="{ 'main-area--collapsed': sidebarCollapsed }">
 
+      <!-- Plan switcher (desktop only) -->
+      <div class="content-topbar" :class="{ 'content-topbar--dark': isDark }">
+        <div class="plan-switcher">
+          <span class="plan-switcher-label">Vista de plan:</span>
+          <button
+            v-for="key in PLAN_KEYS" :key="key"
+            class="plan-btn"
+            :class="[`plan-btn--${key}`, { 'plan-btn--active': currentPlan === key }]"
+            @click="setPlan(key)"
+          >
+            <span class="plan-btn-dot"></span>
+            {{ PLAN_CONFIG[key].label }}
+          </button>
+        </div>
+      </div>
+
       <!-- Mobile topbar -->
       <div class="mobile-header">
         <button class="mobile-menu-btn" @click="mobileOpen = !mobileOpen">
@@ -220,6 +236,12 @@
           <img src="/icono.png" alt="CoopeSaaS" class="mobile-brand-icon" />
           <span><strong>Coope</strong>SaaS</span>
         </RouterLink>
+        <button
+          class="mobile-plan-btn"
+          :class="`mobile-plan-btn--${currentPlan}`"
+          @click="cyclePlan"
+          title="Cambiar plan de demostración"
+        >{{ PLAN_CONFIG[currentPlan].label }}</button>
       </div>
 
       <!-- Page content -->
@@ -241,11 +263,13 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useRole } from '../composables/useRole.js'
+import { usePlan } from '../composables/usePlan.js'
 
 const route = useRoute()
 const router = useRouter()
 
 const { isAdmin, isOperador, isAsociado, isConsejo, roleInfo } = useRole()
+const { currentPlan, PLAN_CONFIG, PLAN_KEYS, setPlan, canView, cyclePlan } = usePlan()
 
 const isDark = ref(false)
 const mobileOpen = ref(false)
@@ -282,6 +306,13 @@ watch(() => route.path, (path) => {
   }
   mobileOpen.value = false
 }, { immediate: true })
+
+watch(currentPlan, () => {
+  const segment = route.path.replace('/dashboard/', '')
+  if (route.path !== '/dashboard' && !canView(segment)) {
+    router.push('/dashboard')
+  }
+})
 
 function toggleDark() {
   isDark.value = !isDark.value
@@ -621,6 +652,75 @@ onUnmounted(() => {
   color: #FF8080;
 }
 
+/* ── Content topbar (plan switcher, desktop) ── */
+.content-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 8px 28px;
+  background: white;
+  border-bottom: 1px solid #E8EEF4;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 140;
+}
+.content-topbar--dark { background: #1D293D; border-color: #3D5069; }
+
+.plan-switcher { display: flex; align-items: center; gap: 8px; }
+.plan-switcher-label { font-size: 11px; font-weight: 600; color: #7A90A0; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+
+/* Plan buttons */
+.plan-btn--basico    { --plan-clr: #4A6070; }
+.plan-btn--pro       { --plan-clr: #C47F0C; }
+.plan-btn--empresarial { --plan-clr: #1A9152; }
+
+.plan-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1.5px solid var(--plan-clr);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--plan-clr);
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.45;
+  transition: opacity 0.2s, background 0.2s, color 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.plan-btn:hover { opacity: 0.75; transform: translateY(-1px); }
+.plan-btn--active { background: var(--plan-clr); color: white; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.plan-btn--active:hover { opacity: 1; }
+
+.plan-btn-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Mobile plan cycle button */
+.mobile-plan-btn {
+  margin-left: auto;
+  padding: 5px 13px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  color: white;
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mobile-plan-btn:hover { opacity: 0.85; transform: scale(0.97); }
+.mobile-plan-btn--basico     { background: #4A6070; }
+.mobile-plan-btn--pro        { background: #C47F0C; }
+.mobile-plan-btn--empresarial{ background: #1A9152; }
+
 /* ── Sidebar collapsed (desktop) ────────── */
 .sidebar--collapsed { width: 64px; }
 .sidebar--collapsed .brand-name { display: none; }
@@ -719,6 +819,7 @@ onUnmounted(() => {
   .sidebar--open { transform: translateX(0); }
   .sidebar-toggle { display: none; }
   .main-area { margin-left: 0 !important; }
+  .content-topbar { display: none; }
   .mobile-header { display: flex; }
   .page-content { padding: 16px; }
 }

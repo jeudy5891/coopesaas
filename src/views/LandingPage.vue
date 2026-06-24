@@ -29,7 +29,7 @@
         <a href="#modulos"        @click="menuOpen = false">Módulos</a>
         <a href="#beneficios"     @click="menuOpen = false">Beneficios</a>
         <a href="#como-funciona"  @click="menuOpen = false">Cómo funciona</a>
-        <RouterLink to="/precios" @click="menuOpen = false">Precios</RouterLink>
+        <RouterLink to="/precios" @click="menuOpen = false">Planes</RouterLink>
         <RouterLink to="/nosotros" @click="menuOpen = false">Nosotros</RouterLink>
         <div class="mobile-menu-actions">
           <RouterLink to="/login" class="btn-ghost-sm" @click="menuOpen = false">Iniciar sesión</RouterLink>
