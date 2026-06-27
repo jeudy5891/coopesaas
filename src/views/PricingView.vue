@@ -255,7 +255,7 @@ const compareRows = [
   { feature: 'Usuarios del sistema',      basico: '5',         pro: '10',         empresas: 'Ilimitados' },
   { feature: 'Exportar Excel / PDF',      basico: false,       pro: true,         empresas: true },
   { feature: 'Personalización de marca',  basico: false,       pro: false,        empresas: true },
-  { feature: 'Capacitación incluida',     basico: false,       pro: false,        empresas: true },
+  { feature: 'Capacitación incluida',     basico: true,        pro: true,         empresas: true },
   { feature: 'Migración de datos',        basico: true,        pro: true,         empresas: true },
   { feature: 'Soporte',                   basico: 'Correo',    pro: 'Prioritario',empresas: 'Dedicado' },
 ]

@@ -21,7 +21,8 @@ import RolesView from '../views/RolesView.vue'
 
 const routes = [
   { path: '/', component: LandingPage, meta: { title: 'CoopeSaaS — Gestión Cooperativa' } },
-  { path: '/precios', component: PricingView, meta: { title: 'Planes — CoopeSaaS' } },
+  { path: '/planes', component: PricingView, meta: { title: 'Planes — CoopeSaaS' } },
+  { path: '/precios', redirect: '/planes' },
   { path: '/nosotros', component: AboutView, meta: { title: 'Nosotros — CoopeSaaS' } },
   { path: '/login', component: LoginPage, meta: { title: 'Iniciar sesión — CoopeSaaS' } },
   { path: '/modulos', component: ModuleSelectorView, meta: { title: 'Configurar módulos — CoopeSaaS' } },

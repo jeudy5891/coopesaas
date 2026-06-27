@@ -12,7 +12,7 @@
           <a href="#modulos">Módulos</a>
           <a href="#beneficios">Beneficios</a>
           <a href="#como-funciona">Cómo funciona</a>
-          <RouterLink to="/precios">Planes</RouterLink>
+          <RouterLink to="/planes">Planes</RouterLink>
           <RouterLink to="/nosotros">Nosotros</RouterLink>
         </div>
         <div class="nav-actions">
@@ -29,7 +29,7 @@
         <a href="#modulos"        @click="menuOpen = false">Módulos</a>
         <a href="#beneficios"     @click="menuOpen = false">Beneficios</a>
         <a href="#como-funciona"  @click="menuOpen = false">Cómo funciona</a>
-        <RouterLink to="/precios" @click="menuOpen = false">Planes</RouterLink>
+        <RouterLink to="/planes" @click="menuOpen = false">Planes</RouterLink>
         <RouterLink to="/nosotros" @click="menuOpen = false">Nosotros</RouterLink>
         <div class="mobile-menu-actions">
           <RouterLink to="/login" class="btn-ghost-sm" @click="menuOpen = false">Iniciar sesión</RouterLink>
@@ -283,7 +283,7 @@
             <h5>Producto</h5>
             <a href="#modulos">Módulos</a>
             <a href="#beneficios">Beneficios</a>
-            <RouterLink to="/precios">Planes</RouterLink>
+            <RouterLink to="/planes">Planes</RouterLink>
           </div>
           <div class="footer-col">
             <h5>Empresa</h5>

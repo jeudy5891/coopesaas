@@ -302,6 +302,18 @@ function generate() {
   </tbody>
 </table>
 
+<!-- Mantenimiento mensual -->
+<div style="margin-bottom:24px">
+  <div class="sh">Costo de mantenimiento mensual</div>
+  <div style="background:#FFF8E7;border:1.5px solid #E8A31C;border-radius:10px;padding:14px 20px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#133C65">Mantenimiento y soporte mensual</div>
+      <div style="font-size:12px;color:#7A90A0;margin-top:3px">Corresponde al 5% del costo total de los módulos implementados</div>
+    </div>
+    <div style="font-size:20px;font-weight:800;color:#C47F0C;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))}<span style="font-size:12px;font-weight:500;color:#7A90A0"> / mes</span></div>
+  </div>
+</div>
+
 <!-- Gantt -->
 <div class="gantt-wrap">
   <div class="sh">Cronograma estimado de implementación</div>

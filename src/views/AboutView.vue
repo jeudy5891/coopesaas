@@ -11,7 +11,7 @@
         <div class="nav-links">
           <RouterLink to="/#modulos">Módulos</RouterLink>
           <RouterLink to="/#beneficios">Beneficios</RouterLink>
-          <RouterLink to="/precios">Planes</RouterLink>
+          <RouterLink to="/planes">Planes</RouterLink>
           <RouterLink to="/nosotros">Nosotros</RouterLink>
         </div>
         <div class="nav-actions">
@@ -25,7 +25,7 @@
       <div class="mobile-menu" :class="{ 'mobile-menu--open': menuOpen }">
         <RouterLink to="/#modulos" @click="menuOpen = false">Módulos</RouterLink>
         <RouterLink to="/#beneficios" @click="menuOpen = false">Beneficios</RouterLink>
-        <RouterLink to="/precios" @click="menuOpen = false">Precios</RouterLink>
+        <RouterLink to="/planes" @click="menuOpen = false">Precios</RouterLink>
         <RouterLink to="/nosotros" @click="menuOpen = false">Nosotros</RouterLink>
         <RouterLink to="/login" @click="menuOpen = false">Iniciar sesión</RouterLink>
       </div>
@@ -183,7 +183,7 @@
             <h5>Producto</h5>
             <RouterLink to="/#modulos">Módulos</RouterLink>
             <RouterLink to="/#beneficios">Beneficios</RouterLink>
-            <RouterLink to="/precios">Planes</RouterLink>
+            <RouterLink to="/planes">Planes</RouterLink>
           </div>
           <div class="footer-col">
             <h5>Empresa</h5>

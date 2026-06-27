@@ -90,7 +90,7 @@ const MODULES = [
     key: 'organos',
     name: 'Órganos Sociales',
     icon: `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-    features: ['Junta Directiva', 'Consejo de Vigilancia', 'Cargos y mandatos', 'Actas de sesiones', 'Control de vencimientos'],
+    features: ['Consejo de Administración', 'Comité de Vigilancia', 'Comité de Educación y Bienestar Social', 'Tribunal Electoral', 'Actas de sesiones', 'Control de vencimientos'],
   },
   {
     key: 'comites',
