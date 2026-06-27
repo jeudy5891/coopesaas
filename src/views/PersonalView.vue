@@ -809,17 +809,6 @@
       </div>
     </template>
 
-    <!-- Pestañas genéricas (Historial, Reportes) -->
-    <template v-if="['historial','reportes'].includes(activeTab)">
-      <div class="coming-soon-card">
-        <div class="cs-icon">
-          <span v-html="tabs.find(t=>t.key===activeTab)?.icon"></span>
-        </div>
-        <h3 class="cs-title">{{ tabs.find(t=>t.key===activeTab)?.label }}</h3>
-        <p class="cs-desc">Este submodulo está en desarrollo. Pronto estará disponible.</p>
-      </div>
-    </template>
-
     <!-- ══════════════════════════════════════════
          MODAL
     ══════════════════════════════════════════ -->
@@ -1256,14 +1245,12 @@ const tabs = [
   { key: 'dashboard',    label: 'Inicio',        icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>` },
   { key: 'expedientes',  label: 'Expedientes',   icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>` }, // eslint-disable-line
   { key: 'documentos',   label: 'Documentos',    icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>` },
-  { key: 'historial',    label: 'Historial',     icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>` },
   { key: 'vacaciones',   label: 'Vacaciones',    icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/></svg>` },
   { key: 'permisos',     label: 'Permisos',      icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>` },
   { key: 'asistencia',   label: 'Asistencia',    icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>` },
   { key: 'incapacidades',label: 'Incapacidades', icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>` },
   { key: 'capacitaciones',label:'Capacitaciones',icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>` },
   { key: 'evaluaciones', label: 'Evaluaciones',  icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>` },
-  { key: 'reportes',     label: 'Reportes',      icon: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>` },
 ]
 
 /* ── Indicadores ────────────────────────── */
