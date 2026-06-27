@@ -212,15 +212,24 @@
 
       <!-- Topbar (desktop only) -->
       <div class="content-topbar" :class="{ 'content-topbar--dark': isDark }">
-        <button class="cotizacion-btn" @click="showCotizacion = true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-          Generar cotización
-        </button>
+        <div class="topbar-actions">
+          <button class="modulos-btn" @click="router.push('/modulos')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+            Elegir módulos
+          </button>
+          <button class="cotizacion-btn" @click="showCotizacion = true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            Generar cotización
+          </button>
+        </div>
       </div>
 
       <!-- Mobile topbar -->
@@ -233,14 +242,22 @@
           <img src="/icono.png" alt="CoopeSaaS" class="mobile-brand-icon" />
           <span><strong>Coope</strong>SaaS</span>
         </RouterLink>
-        <button class="mobile-cotizacion-btn" @click="showCotizacion = true" title="Generar cotización">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
-          Cotizar
-        </button>
+        <div class="mobile-topbar-actions">
+          <button class="mobile-icon-btn" @click="router.push('/modulos')" title="Elegir módulos">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+          </button>
+          <button class="mobile-cotizacion-btn" @click="showCotizacion = true" title="Generar cotización">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            Cotizar
+          </button>
+        </div>
       </div>
 
       <!-- Page content -->
@@ -665,6 +682,29 @@ onUnmounted(() => {
 }
 .content-topbar--dark { background: #1D293D; border-color: #3D5069; }
 
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.modulos-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1.5px solid #93B8D8;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4A7090;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.modulos-btn:hover { background: #133C65; color: white; border-color: #133C65; }
+
 .cotizacion-btn {
   display: inline-flex;
   align-items: center;
@@ -682,9 +722,33 @@ onUnmounted(() => {
 }
 .cotizacion-btn:hover { background: #E8A31C; color: white; }
 
+/* Mobile actions group */
+.mobile-topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.mobile-icon-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1.5px solid #CBD5E1;
+  background: transparent;
+  color: #4A7090;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.mobile-icon-btn:hover { background: #133C65; color: white; border-color: #133C65; }
+
 /* Mobile cotización button */
 .mobile-cotizacion-btn {
-  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 5px;
