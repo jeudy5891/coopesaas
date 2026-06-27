@@ -212,7 +212,7 @@
 
       <!-- Plan switcher (desktop only) -->
       <div class="content-topbar" :class="{ 'content-topbar--dark': isDark }">
-        <button class="cotizacion-btn" @click="router.push('/modulos')">
+        <button class="cotizacion-btn" @click="showCotizacion = true">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
             <polyline points="14 2 14 8 20 8"/>
@@ -265,6 +265,9 @@
       <div v-if="mobileOpen" class="mobile-overlay" @click="mobileOpen = false"></div>
     </Transition>
 
+    <!-- Cotización modal -->
+    <CotizacionModal v-if="showCotizacion" @close="showCotizacion = false" />
+
   </div>
 </template>
 
@@ -274,6 +277,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useRole } from '../composables/useRole.js'
 import { usePlan } from '../composables/usePlan.js'
 import { useModules } from '../composables/useModules.js'
+import CotizacionModal from '../components/CotizacionModal.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -283,6 +287,7 @@ const { currentPlan, PLAN_CONFIG, PLAN_KEYS, setPlan, cyclePlan } = usePlan()
 const { isModuleActive } = useModules()
 
 const isDark = ref(false)
+const showCotizacion = ref(false)
 const mobileOpen = ref(false)
 const configOpen = ref(false)
 const sidebarCollapsed = ref(false)
