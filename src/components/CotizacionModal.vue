@@ -310,7 +310,7 @@ function generate() {
       <div style="font-size:13px;font-weight:700;color:#133C65">Mantenimiento y soporte mensual</div>
       <div style="font-size:12px;color:#7A90A0;margin-top:3px">Corresponde al 5% del costo total de los módulos implementados</div>
     </div>
-    <div style="font-size:20px;font-weight:800;color:#C47F0C;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))}<span style="font-size:12px;font-weight:500;color:#7A90A0"> / mes</span></div>
+    <div style="font-size:13px;font-weight:500;color:#C47F0C;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))}<span style="color:#7A90A0"> / mes</span></div>
   </div>
 </div>
 
