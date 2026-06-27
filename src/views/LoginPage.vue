@@ -142,7 +142,7 @@ async function handleLogin() {
       String(u.password) === password.value
     )
     if (found) {
-      router.push('/dashboard')
+      router.push('/modulos')
     } else {
       loginError.value = 'Correo o contraseña incorrectos. Si aún no tienes acceso, solicita una demo.'
     }

@@ -3,6 +3,7 @@ import LandingPage from '../views/LandingPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import PricingView from '../views/PricingView.vue'
 import AboutView from '../views/AboutView.vue'
+import ModuleSelectorView from '../views/ModuleSelectorView.vue'
 import DashboardLayout from '../layouts/DashboardLayout.vue'
 import DashboardHome from '../views/DashboardHome.vue'
 import PersonalView from '../views/PersonalView.vue'
@@ -23,6 +24,7 @@ const routes = [
   { path: '/precios', component: PricingView, meta: { title: 'Planes — CoopeSaaS' } },
   { path: '/nosotros', component: AboutView, meta: { title: 'Nosotros — CoopeSaaS' } },
   { path: '/login', component: LoginPage, meta: { title: 'Iniciar sesión — CoopeSaaS' } },
+  { path: '/modulos', component: ModuleSelectorView, meta: { title: 'Configurar módulos — CoopeSaaS' } },
   {
     path: '/dashboard',
     component: DashboardLayout,

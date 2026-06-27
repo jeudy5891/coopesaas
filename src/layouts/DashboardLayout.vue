@@ -30,7 +30,7 @@
 
         <div class="nav-section-label">Módulos</div>
 
-        <RouterLink v-if="!isAsociado && !isConsejo" to="/dashboard/personal" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/personal') }">
+        <RouterLink v-if="isModuleActive('personal') && !isAsociado && !isConsejo" to="/dashboard/personal" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/personal') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
@@ -40,7 +40,7 @@
           <span class="nav-label">Personal</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/asociados" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/asociados') }">
+        <RouterLink v-if="isModuleActive('asociados')" to="/dashboard/asociados" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/asociados') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
@@ -49,7 +49,7 @@
           <span class="nav-label">Asociados</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/organos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/organos') }">
+        <RouterLink v-if="isModuleActive('organos')" to="/dashboard/organos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/organos') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -59,7 +59,7 @@
           <span class="nav-label">Órganos Sociales</span>
         </RouterLink>
 
-        <RouterLink v-if="canView('comites')" to="/dashboard/comites" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/comites') }">
+        <RouterLink v-if="isModuleActive('comites')" to="/dashboard/comites" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/comites') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -69,7 +69,7 @@
           <span class="nav-label">Comités</span>
         </RouterLink>
 
-        <RouterLink to="/dashboard/asambleas" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/asambleas') }">
+        <RouterLink v-if="isModuleActive('asambleas')" to="/dashboard/asambleas" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/asambleas') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -80,7 +80,7 @@
           <span class="nav-label">Asambleas</span>
         </RouterLink>
 
-        <RouterLink v-if="canView('votaciones')" to="/dashboard/votaciones" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/votaciones') }">
+        <RouterLink v-if="isModuleActive('votaciones')" to="/dashboard/votaciones" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/votaciones') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
@@ -89,7 +89,7 @@
           <span class="nav-label">Votaciones</span>
         </RouterLink>
 
-        <RouterLink v-if="canView('finanzas')" to="/dashboard/finanzas" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/finanzas') }">
+        <RouterLink v-if="isModuleActive('finanzas')" to="/dashboard/finanzas" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/finanzas') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
@@ -98,7 +98,7 @@
           <span class="nav-label">Finanzas</span>
         </RouterLink>
 
-        <RouterLink v-if="canView('creditos')" to="/dashboard/creditos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/creditos') }">
+        <RouterLink v-if="isModuleActive('creditos')" to="/dashboard/creditos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/creditos') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/>
@@ -107,7 +107,7 @@
           <span class="nav-label">Créditos</span>
         </RouterLink>
 
-        <RouterLink v-if="canView('riesgos')" to="/dashboard/riesgos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/riesgos') }">
+        <RouterLink v-if="isModuleActive('riesgos')" to="/dashboard/riesgos" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/riesgos') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
@@ -117,7 +117,7 @@
           <span class="nav-label">Riesgos</span>
         </RouterLink>
 
-        <RouterLink v-if="canView('reportes')" to="/dashboard/reportes" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/reportes') }">
+        <RouterLink v-if="isModuleActive('reportes')" to="/dashboard/reportes" class="nav-item" :class="{ 'nav-item--active': isActive('/dashboard/reportes') }">
           <span class="nav-icon">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>
@@ -212,6 +212,15 @@
 
       <!-- Plan switcher (desktop only) -->
       <div class="content-topbar" :class="{ 'content-topbar--dark': isDark }">
+        <button class="cotizacion-btn" @click="router.push('/modulos')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          Generar cotización
+        </button>
         <div class="plan-switcher">
           <span class="plan-switcher-label">Vista de plan:</span>
           <button
@@ -264,12 +273,14 @@ import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useRole } from '../composables/useRole.js'
 import { usePlan } from '../composables/usePlan.js'
+import { useModules } from '../composables/useModules.js'
 
 const route = useRoute()
 const router = useRouter()
 
 const { isAdmin, isOperador, isAsociado, isConsejo, roleInfo } = useRole()
-const { currentPlan, PLAN_CONFIG, PLAN_KEYS, setPlan, canView, cyclePlan } = usePlan()
+const { currentPlan, PLAN_CONFIG, PLAN_KEYS, setPlan, cyclePlan } = usePlan()
+const { isModuleActive } = useModules()
 
 const isDark = ref(false)
 const mobileOpen = ref(false)
@@ -656,7 +667,7 @@ onUnmounted(() => {
 .content-topbar {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding: 8px 28px;
   background: white;
   border-bottom: 1px solid #E8EEF4;
@@ -666,6 +677,24 @@ onUnmounted(() => {
   z-index: 140;
 }
 .content-topbar--dark { background: #1D293D; border-color: #3D5069; }
+
+.cotizacion-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border: 1.5px solid #E8A31C;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #C47F0C;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  margin-right: 12px;
+}
+.cotizacion-btn:hover { background: #E8A31C; color: white; }
 
 .plan-switcher { display: flex; align-items: center; gap: 8px; }
 .plan-switcher-label { font-size: 11px; font-weight: 600; color: #7A90A0; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
