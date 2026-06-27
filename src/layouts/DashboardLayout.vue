@@ -210,7 +210,7 @@
     <!-- ─── MAIN AREA ─── -->
     <div class="main-area" :class="{ 'main-area--collapsed': sidebarCollapsed }">
 
-      <!-- Plan switcher (desktop only) -->
+      <!-- Topbar (desktop only) -->
       <div class="content-topbar" :class="{ 'content-topbar--dark': isDark }">
         <button class="cotizacion-btn" @click="showCotizacion = true">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -221,18 +221,6 @@
           </svg>
           Generar cotización
         </button>
-        <div class="plan-switcher">
-          <span class="plan-switcher-label">Vista de plan:</span>
-          <button
-            v-for="key in PLAN_KEYS" :key="key"
-            class="plan-btn"
-            :class="[`plan-btn--${key}`, { 'plan-btn--active': currentPlan === key }]"
-            @click="setPlan(key)"
-          >
-            <span class="plan-btn-dot"></span>
-            {{ PLAN_CONFIG[key].label }}
-          </button>
-        </div>
       </div>
 
       <!-- Mobile topbar -->
@@ -245,12 +233,14 @@
           <img src="/icono.png" alt="CoopeSaaS" class="mobile-brand-icon" />
           <span><strong>Coope</strong>SaaS</span>
         </RouterLink>
-        <button
-          class="mobile-plan-btn"
-          :class="`mobile-plan-btn--${currentPlan}`"
-          @click="cyclePlan"
-          title="Cambiar plan de demostración"
-        >{{ PLAN_CONFIG[currentPlan].label }}</button>
+        <button class="mobile-cotizacion-btn" @click="showCotizacion = true" title="Generar cotización">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          Cotizar
+        </button>
       </div>
 
       <!-- Page content -->
@@ -275,7 +265,6 @@
 import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useRole } from '../composables/useRole.js'
-import { usePlan } from '../composables/usePlan.js'
 import { useModules } from '../composables/useModules.js'
 import CotizacionModal from '../components/CotizacionModal.vue'
 
@@ -283,7 +272,6 @@ const route = useRoute()
 const router = useRouter()
 
 const { isAdmin, isOperador, isAsociado, isConsejo, roleInfo } = useRole()
-const { currentPlan, PLAN_CONFIG, PLAN_KEYS, setPlan, cyclePlan } = usePlan()
 const { isModuleActive } = useModules()
 
 const isDark = ref(false)
@@ -323,12 +311,6 @@ watch(() => route.path, (path) => {
   mobileOpen.value = false
 }, { immediate: true })
 
-watch(currentPlan, () => {
-  const segment = route.path.replace('/dashboard/', '')
-  if (route.path !== '/dashboard' && !canView(segment)) {
-    router.push('/dashboard')
-  }
-})
 
 function toggleDark() {
   isDark.value = !isDark.value
@@ -672,7 +654,7 @@ onUnmounted(() => {
 .content-topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 8px 28px;
   background: white;
   border-bottom: 1px solid #E8EEF4;
@@ -687,7 +669,7 @@ onUnmounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 14px;
+  padding: 5px 16px;
   border: 1.5px solid #E8A31C;
   border-radius: 20px;
   font-size: 12px;
@@ -697,63 +679,28 @@ onUnmounted(() => {
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
-  margin-right: 12px;
 }
 .cotizacion-btn:hover { background: #E8A31C; color: white; }
 
-.plan-switcher { display: flex; align-items: center; gap: 8px; }
-.plan-switcher-label { font-size: 11px; font-weight: 600; color: #7A90A0; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
-
-/* Plan buttons */
-.plan-btn--basico    { --plan-clr: #4A6070; }
-.plan-btn--pro       { --plan-clr: #C47F0C; }
-.plan-btn--empresarial { --plan-clr: #1A9152; }
-
-.plan-btn {
+/* Mobile cotización button */
+.mobile-cotizacion-btn {
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 14px;
-  border: 1.5px solid var(--plan-clr);
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--plan-clr);
-  background: transparent;
-  cursor: pointer;
-  opacity: 0.45;
-  transition: opacity 0.2s, background 0.2s, color 0.2s, transform 0.15s;
-  white-space: nowrap;
-}
-.plan-btn:hover { opacity: 0.75; transform: translateY(-1px); }
-.plan-btn--active { background: var(--plan-clr); color: white; opacity: 1; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-.plan-btn--active:hover { opacity: 1; }
-
-.plan-btn-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: currentColor;
-  flex-shrink: 0;
-}
-
-/* Mobile plan cycle button */
-.mobile-plan-btn {
-  margin-left: auto;
-  padding: 5px 13px;
+  gap: 5px;
+  padding: 5px 12px;
   border-radius: 16px;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
-  border: none;
-  color: white;
-  transition: opacity 0.15s, transform 0.15s;
+  border: 1.5px solid #E8A31C;
+  color: #C47F0C;
+  background: transparent;
+  transition: background 0.15s, color 0.15s;
   white-space: nowrap;
   flex-shrink: 0;
 }
-.mobile-plan-btn:hover { opacity: 0.85; transform: scale(0.97); }
-.mobile-plan-btn--basico     { background: #4A6070; }
-.mobile-plan-btn--pro        { background: #C47F0C; }
-.mobile-plan-btn--empresarial{ background: #1A9152; }
+.mobile-cotizacion-btn:hover { background: #E8A31C; color: white; }
 
 /* ── Sidebar collapsed (desktop) ────────── */
 .sidebar--collapsed { width: 64px; }

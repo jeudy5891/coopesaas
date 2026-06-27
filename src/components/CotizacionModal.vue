@@ -80,6 +80,11 @@ const MODULE_CATALOG = {
   reportes:   { name: 'Reportes Gerenciales', semanas: 4,  costo: 1400000, complexity: 'Alto',       badge: 'red'   },
 }
 
+const FIXED_MODULES = [
+  { key: 'dashboard',     name: 'Dashboard / Inicio', semanas: 2, costo: 0, complexity: 'Incluido', badge: 'free' },
+  { key: 'configuracion', name: 'Configuración',       semanas: 2, costo: 0, complexity: 'Incluido', badge: 'free' },
+]
+
 const form = ref({ nombre: '', cedula: '', representante: '', email: '', telefono: '' })
 
 const activeModules = computed(() =>
@@ -100,14 +105,15 @@ function quoteNumber() {
 }
 
 function buildGanttSVG(modules, totalW) {
+  const total   = modules.reduce((s, m) => s + m.semanas, 0)
   const rowH    = 34
   const labelW  = 160
   const headerH = 32
   const chartW  = totalW - labelW - 8
-  const colW    = Math.max(10, Math.floor(chartW / totalSemanas.value))
-  const svgW    = labelW + totalSemanas.value * colW + 8
+  const colW    = Math.max(10, Math.floor(chartW / total))
+  const svgW    = labelW + total * colW + 8
   const svgH    = headerH + modules.length * rowH + 8
-  const step    = Math.ceil(totalSemanas.value / 18)
+  const step    = Math.ceil(total / 18)
   const barColors = ['#133C65','#1A5190','#1E6BB8','#1A9152','#C47F0C','#7B3FA0','#B03A2E','#117A65','#1F618D','#6C3483']
 
   let s = `<svg width="${svgW}" height="${svgH}" xmlns="http://www.w3.org/2000/svg" style="font-family:Arial,sans-serif;display:block">`
@@ -119,7 +125,7 @@ function buildGanttSVG(modules, totalW) {
   s += `<text x="10" y="20" fill="rgba(255,255,255,0.6)" font-size="10" font-weight="700">MÓDULO</text>`
 
   // Week headers + grid lines
-  for (let w = 1; w <= totalSemanas.value; w++) {
+  for (let w = 1; w <= total; w++) {
     const x = labelW + (w - 1) * colW
     if ((w - 1) % step === 0) {
       s += `<text x="${x + colW * step / 2}" y="20" text-anchor="middle" fill="white" font-size="10" font-weight="600">S${w}</text>`
@@ -161,25 +167,33 @@ function generate() {
   const today   = new Date()
   const dateStr = today.toLocaleDateString('es-CR', { year: 'numeric', month: 'long', day: 'numeric' })
   const mods    = activeModules.value
+  const allMods = [...FIXED_MODULES, ...mods]
+  const allTotalSemanas = allMods.reduce((s, m) => s + m.semanas, 0)
   const logoSrc = window.location.origin + (import.meta.env.BASE_URL || '/') + 'icono.png'
 
-  const tableRows = mods.map((m, i) => {
-    const badgeStyle = {
-      mid:   'background:#FEF9C3;color:#854D0E',
-      high:  'background:#FFEDD5;color:#9A3412',
-      red:   'background:#FEE2E2;color:#991B1B',
-      xhigh: 'background:#EDE9FE;color:#5B21B6',
-    }[m.badge] || ''
+  const badgeStyles = {
+    free:  'background:#DCFCE7;color:#166534',
+    mid:   'background:#FEF9C3;color:#854D0E',
+    high:  'background:#FFEDD5;color:#9A3412',
+    red:   'background:#FEE2E2;color:#991B1B',
+    xhigh: 'background:#EDE9FE;color:#5B21B6',
+  }
+
+  const tableRows = allMods.map((m, i) => {
+    const bs = badgeStyles[m.badge] || ''
+    const priceCell = m.costo === 0
+      ? `<span style="color:#166534;font-weight:700">Gratis</span>`
+      : formatCRC(m.costo)
     return `<tr>
       <td style="text-align:center;color:#7A90A0">${i + 1}</td>
       <td><strong>${m.name}</strong></td>
-      <td><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;${badgeStyle}">${m.complexity}</span></td>
+      <td><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;${bs}">${m.complexity}</span></td>
       <td style="text-align:center">${m.semanas} sem.</td>
-      <td style="text-align:right;font-weight:600">${formatCRC(m.costo)}</td>
+      <td style="text-align:right;font-weight:600">${priceCell}</td>
     </tr>`
   }).join('')
 
-  const gantt = buildGanttSVG(mods, 720)
+  const gantt = buildGanttSVG(allMods, 720)
 
   const html = `<!DOCTYPE html>
 <html lang="es">
@@ -282,18 +296,17 @@ function generate() {
     ${tableRows}
     <tr class="total-row">
       <td colspan="3">TOTAL</td>
-      <td style="text-align:center">${totalSemanas.value} semanas</td>
+      <td style="text-align:center">${allTotalSemanas} semanas</td>
       <td style="text-align:right">${formatCRC(totalCosto.value)}</td>
     </tr>
   </tbody>
 </table>
-<p style="font-size:11px;color:#7A90A0;margin-bottom:24px">* Tarifa base: ₡5,000/hora · Equipo: 1 analista, 1 dev frontend, 1 dev backend, 1 QA.</p>
 
 <!-- Gantt -->
 <div class="gantt-wrap">
   <div class="sh">Cronograma estimado de implementación</div>
   ${gantt}
-  <p style="font-size:11px;color:#7A90A0;margin-top:8px">* Los módulos se desarrollan de forma secuencial. Las semanas son estimadas sobre días hábiles.</p>
+  <p style="font-size:11px;color:#7A90A0;margin-top:8px">*No se incluye la duración del levantamiento de requerimientos y migración de datos.</p>
 </div>
 
 <!-- Footer -->
