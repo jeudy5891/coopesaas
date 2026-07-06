@@ -319,7 +319,10 @@ function generate() {
     ${discountApplied.value ? `<tr style="background:#F0FDF4!important">
       <td colspan="3" style="color:#166534;font-weight:700">20% de descuento — primer año</td>
       <td></td>
-      <td style="text-align:right;font-weight:700;color:#16A34A">- ${formatCRC(Math.round(totalCosto.value * 0.20))}</td>
+      <td style="text-align:right">
+        <div style="text-decoration:line-through;color:#7A90A0;font-size:12px;white-space:nowrap">${formatCRC(totalCosto.value)}</div>
+        <div style="font-weight:700;color:#16A34A;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.80))}</div>
+      </td>
     </tr>` : ''}
   </tbody>
 </table>
