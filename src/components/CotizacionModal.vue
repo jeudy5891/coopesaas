@@ -39,6 +39,22 @@
               <span>Teléfono</span>
               <input v-model="form.telefono" placeholder="2222-XXXX" />
             </label>
+            <label class="field field--full">
+              <span>Código de descuento</span>
+              <div class="discount-wrap">
+                <input
+                  v-model="form.descuento"
+                  placeholder="Ingresá tu código"
+                  class="discount-input"
+                  :class="{ 'discount-input--valid': discountApplied, 'discount-input--invalid': form.descuento && !discountApplied }"
+                />
+                <span v-if="discountApplied" class="discount-tag discount-tag--ok">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  20% de descuento aplicado — primer año
+                </span>
+                <span v-else-if="form.descuento" class="discount-tag discount-tag--err">Código inválido</span>
+              </div>
+            </label>
           </div>
 
           <div v-if="activeModules.length === 0" class="no-modules">
@@ -85,7 +101,8 @@ const FIXED_MODULES = [
   { key: 'configuracion', name: 'Configuración',       semanas: 2, costo: 0, complexity: 'Incluido', badge: 'free' },
 ]
 
-const form = ref({ nombre: '', cedula: '', representante: '', email: '', telefono: '' })
+const form = ref({ nombre: '', cedula: '', representante: '', email: '', telefono: '', descuento: '' })
+const discountApplied = computed(() => form.value.descuento.trim().toLowerCase() === '20saas')
 
 const activeModules = computed(() =>
   ALL_MODULE_KEYS.filter(k => isModuleActive(k)).map(k => ({ key: k, ...MODULE_CATALOG[k] }))
@@ -299,6 +316,11 @@ function generate() {
       <td style="text-align:center">${allTotalSemanas} semanas</td>
       <td style="text-align:right">${formatCRC(totalCosto.value)}</td>
     </tr>
+    ${discountApplied.value ? `<tr style="background:#F0FDF4!important">
+      <td colspan="3" style="color:#166534;font-weight:700">20% de descuento — primer año</td>
+      <td></td>
+      <td style="text-align:right;font-weight:700;color:#16A34A">- ${formatCRC(Math.round(totalCosto.value * 0.20))}</td>
+    </tr>` : ''}
   </tbody>
 </table>
 
@@ -310,7 +332,14 @@ function generate() {
       <div style="font-size:13px;font-weight:700;color:#133C65">Mantenimiento y soporte mensual</div>
       <div style="font-size:12px;color:#7A90A0;margin-top:3px">Corresponde al 5% del costo total de los módulos implementados</div>
     </div>
-    <div style="font-size:13px;font-weight:500;color:#C47F0C;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))}<span style="color:#7A90A0"> / mes</span></div>
+    <div>
+      ${discountApplied.value
+        ? `<div style="font-size:13px;color:#7A90A0;text-decoration:line-through;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))} / mes</div>
+           <div style="font-size:13px;font-weight:600;color:#16A34A;white-space:nowrap;margin-top:3px">${formatCRC(Math.round(totalCosto.value * 0.05 * 0.80))} / mes</div>
+           <div style="font-size:10px;color:#7A90A0;margin-top:2px">Con 20% de descuento — primer año</div>`
+        : `<div style="font-size:13px;font-weight:500;color:#C47F0C;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))}<span style="color:#7A90A0"> / mes</span></div>`
+      }
+    </div>
   </div>
 </div>
 
@@ -460,6 +489,40 @@ function generate() {
 
 .field input:focus { border-color: #133C65; }
 .field input::placeholder { color: #A0B0BF; }
+
+.discount-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.discount-input {
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #1a1a2e;
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+.discount-input:focus { border-color: #133C65; }
+.discount-input--valid  { border-color: #16A34A !important; background: #F0FDF4; }
+.discount-input--invalid { border-color: #DC2626 !important; background: #FEF2F2; }
+.discount-input::placeholder { color: #A0B0BF; }
+
+.discount-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+.discount-tag--ok  { background: #DCFCE7; color: #166534; }
+.discount-tag--err { background: #FEE2E2; color: #991B1B; }
 
 .no-modules {
   margin-top: 16px;
