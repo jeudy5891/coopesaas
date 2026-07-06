@@ -317,7 +317,7 @@ function generate() {
       <td style="text-align:right">${formatCRC(totalCosto.value)}</td>
     </tr>
     ${discountApplied.value ? `<tr style="background:#F0FDF4!important">
-      <td colspan="3" style="color:#166534;font-weight:700">20% de descuento — primer año</td>
+      <td colspan="3" style="color:#166534;font-weight:700">20% de descuento</td>
       <td></td>
       <td style="text-align:right">
         <div style="text-decoration:line-through;color:#7A90A0;font-size:12px;white-space:nowrap">${formatCRC(totalCosto.value)}</div>
@@ -326,6 +326,19 @@ function generate() {
     </tr>` : ''}
   </tbody>
 </table>
+
+<!-- Notas legales -->
+<div style="margin-bottom:20px;padding:14px 16px;background:#F8FAFC;border-left:3px solid #CBD5E1;border-radius:0 8px 8px 0">
+  <p style="font-size:11px;color:#5A7490;margin-bottom:6px;line-height:1.6">
+    <strong style="color:#133C65">①</strong> Se suscribirá un contrato formal que establecerá el alcance del proyecto, los módulos cotizados, los entregables específicos, los plazos de ejecución y los criterios de aceptación acordados por ambas partes.
+  </p>
+  <p style="font-size:11px;color:#5A7490;margin-bottom:6px;line-height:1.6">
+    <strong style="color:#133C65">②</strong> El costo de desarrollo se cancelará en dos tractos: el <strong>60%</strong> al momento de la firma del contrato y el <strong>40%</strong> restante contra la entrega y aceptación formal del sistema por parte del cliente.
+  </p>
+  <p style="font-size:11px;color:#5A7490;line-height:1.6">
+    <strong style="color:#133C65">③</strong> La incorporación de módulos adicionales posteriores a la firma del contrato será cotizada de forma independiente. El costo de mantenimiento mensual se recalculará e incrementará proporcionalmente según los módulos vigentes.
+  </p>
+</div>
 
 <!-- Mantenimiento mensual -->
 <div style="margin-bottom:24px">
