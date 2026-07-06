@@ -117,8 +117,10 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { APPS_SCRIPT_URL } from '../config.js'
+import { useAuth } from '../composables/useAuth.js'
 
 const router = useRouter()
+const { setUser } = useAuth()
 const email        = ref('')
 const password     = ref('')
 const showPassword = ref(false)
@@ -142,6 +144,7 @@ async function handleLogin() {
       String(u.password) === password.value
     )
     if (found) {
+      setUser(found)
       router.push('/modulos')
     } else {
       loginError.value = 'Correo o contraseña incorrectos. Si aún no tienes acceso, solicita una demo.'

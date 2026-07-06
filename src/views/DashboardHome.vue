@@ -131,11 +131,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { useRole } from '../composables/useRole.js'
+import { useAuth } from '../composables/useAuth.js'
 
 const { isOperador, roleInfo } = useRole()
-const firstName = computed(() => roleInfo.value.user.split(' ')[0])
+const { firstName } = useAuth()
 const checkinDone = ref(false)
 function registrarEntrada() { checkinDone.value = true }
 

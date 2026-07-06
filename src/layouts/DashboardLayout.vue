@@ -190,10 +190,10 @@
 
         <!-- User card -->
         <div class="user-card">
-          <div class="user-avatar" :style="{ background: roleInfo.avatarBg }">{{ roleInfo.initials }}</div>
+          <div class="user-avatar">{{ initials }}</div>
           <div class="user-details">
-            <span class="user-name">{{ roleInfo.user }}</span>
-            <span class="user-email">{{ roleInfo.email }}</span>
+            <span class="user-name">{{ fullName }}</span>
+            <span class="user-email">{{ userEmail }}</span>
           </div>
           <button class="logout-btn" title="Cerrar sesión" @click="logout">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -283,6 +283,7 @@ import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useRole } from '../composables/useRole.js'
 import { useModules } from '../composables/useModules.js'
+import { useAuth } from '../composables/useAuth.js'
 import CotizacionModal from '../components/CotizacionModal.vue'
 
 const route = useRoute()
@@ -290,6 +291,7 @@ const router = useRouter()
 
 const { isAdmin, isOperador, isAsociado, isConsejo, roleInfo } = useRole()
 const { isModuleActive } = useModules()
+const { fullName, userEmail, initials, clearUser } = useAuth()
 
 const isDark = ref(false)
 const showCotizacion = ref(false)
@@ -336,6 +338,7 @@ function toggleDark() {
 }
 
 function logout() {
+  clearUser()
   router.push('/login')
 }
 
