@@ -369,7 +369,6 @@ function generate() {
 
 <!-- Footer -->
 <div class="footer">
-  <span>Los montos son estimados y están sujetos a levantamiento de requerimientos formal.</span>
   <span><strong>CoopeSaaS</strong> · ${new Date().getFullYear()}</span>
 </div>
 
