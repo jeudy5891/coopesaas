@@ -131,7 +131,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRole } from '../composables/useRole.js'
 import { useAuth } from '../composables/useAuth.js'
 
