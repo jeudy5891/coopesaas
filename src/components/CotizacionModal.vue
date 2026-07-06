@@ -290,9 +290,9 @@ function generate() {
   </div>
   <div class="box">
     <div class="box-title">Proveedor</div>
-    <p><strong>CoopeSaaS S.A.</strong></p>
+    <p><strong>CoopeSaaS</strong></p>
     <p>Plataforma SaaS de Gestión Cooperativa</p>
-    <p>info@coopesaas.cr</p>
+    <p>jeupma@gmail.com</p>
     <p>Costa Rica</p>
   </div>
 </div>
