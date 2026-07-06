@@ -364,6 +364,7 @@ function generate() {
   <div class="sh">Cronograma estimado de implementación</div>
   ${gantt}
   <p style="font-size:11px;color:#7A90A0;margin-top:8px">*No se incluye la duración del levantamiento de requerimientos y migración de datos.</p>
+  <p style="font-size:11px;color:#7A90A0;margin-top:4px">*Los precios indicados incluyen el Impuesto al Valor Agregado (IVA) vigente.</p>
 </div>
 
 <!-- Footer -->
