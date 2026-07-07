@@ -240,24 +240,20 @@ function renderCell(val) {
 }
 
 const compareRows = [
-  { feature: 'Inicio / Dashboard',        basico: true,        pro: true,         empresas: true },
-  { feature: 'Personal',                  basico: true,        pro: true,         empresas: true },
-  { feature: 'Asociados',                 basico: 'Hasta 200', pro: 'Hasta 500',  empresas: 'Ilimitados' },
-  { feature: 'Órganos Sociales',          basico: true,        pro: true,         empresas: true },
-  { feature: 'Asambleas',                 basico: true,        pro: true,         empresas: true },
-  { feature: 'Comités',                   basico: false,       pro: true,         empresas: true },
-  { feature: 'Votaciones',                basico: false,       pro: true,         empresas: true },
-  { feature: 'Finanzas',                  basico: false,       pro: false,        empresas: true },
-  { feature: 'Créditos',                  basico: false,       pro: false,        empresas: true },
-  { feature: 'Riesgos',                   basico: false,       pro: false,        empresas: true },
-  { feature: 'Reportes Gerenciales',      basico: false,       pro: false,        empresas: true },
-  { feature: 'Configuración del sistema', basico: true,        pro: true,         empresas: true },
-  { feature: 'Usuarios del sistema',      basico: '5',         pro: '10',         empresas: 'Ilimitados' },
-  { feature: 'Exportar Excel / PDF',      basico: false,       pro: true,         empresas: true },
-  { feature: 'Personalización de marca',  basico: false,       pro: false,        empresas: true },
-  { feature: 'Capacitación incluida',     basico: true,        pro: true,         empresas: true },
-  { feature: 'Migración de datos',        basico: true,        pro: true,         empresas: true },
-  { feature: 'Soporte',                   basico: 'Correo',    pro: 'Prioritario',empresas: 'Dedicado' },
+  { feature: 'Personal',              basico: true,  pro: true,          empresas: true },
+  { feature: 'Asociados',             basico: true,  pro: true,          empresas: true },
+  { feature: 'Órganos Sociales',      basico: true,  pro: true,          empresas: true },
+  { feature: 'Asambleas',             basico: true,  pro: true,          empresas: true },
+  { feature: 'Comités',               basico: false, pro: true,          empresas: true },
+  { feature: 'Votaciones',            basico: false, pro: true,          empresas: true },
+  { feature: 'Finanzas',              basico: false, pro: false,         empresas: true },
+  { feature: 'Créditos',              basico: false, pro: false,         empresas: true },
+  { feature: 'Riesgos',               basico: false, pro: false,         empresas: true },
+  { feature: 'Reportes Gerenciales',  basico: false, pro: false,         empresas: true },
+  { feature: 'Exportar Excel / PDF',  basico: false, pro: true,          empresas: true },
+  { feature: 'Capacitación incluida', basico: true,  pro: true,          empresas: true },
+  { feature: 'Migración de datos',    basico: true,  pro: true,          empresas: true },
+  { feature: 'Soporte',               basico: 'Correo', pro: 'Prioritario', empresas: 'Dedicado' },
 ]
 
 const faqs = [
