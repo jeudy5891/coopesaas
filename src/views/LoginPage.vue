@@ -132,16 +132,27 @@ onMounted(() => {
   requestAnimationFrame(() => { formVisible.value = true })
 })
 
+async function fetchUsers() {
+  const res = await fetch(APPS_SCRIPT_URL, { redirect: 'follow' })
+  if (!res.ok) throw new Error('HTTP ' + res.status)
+  return res.json()
+}
+
 async function handleLogin() {
   if (!email.value || !password.value) return
   loginError.value   = ''
   loginLoading.value = true
   try {
-    const res   = await fetch(APPS_SCRIPT_URL)
-    const users = await res.json()
+    let users
+    try {
+      users = await fetchUsers()
+    } catch {
+      await new Promise(r => setTimeout(r, 900))
+      users = await fetchUsers()
+    }
     const found = users.find(u =>
-      String(u.email).toLowerCase() === email.value.trim().toLowerCase() &&
-      String(u.password) === password.value
+      String(u.email).trim().toLowerCase() === email.value.trim().toLowerCase() &&
+      String(u.password).trim() === password.value.trim()
     )
     if (found) {
       setUser(found)
