@@ -65,7 +65,7 @@
           </div>
           <div class="promo-sticker">
             <span class="promo-pct">-20%</span>
-            <span class="promo-sub">Primeras cooperativas</span>
+            <span class="promo-sub">mes de julio</span>
           </div>
         </div>
 
