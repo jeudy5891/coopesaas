@@ -48,6 +48,27 @@
     <!-- PLANES -->
     <section class="plans-section">
       <div class="section-wrap">
+
+        <!-- Sticker promo + toggle moneda -->
+        <div class="plans-promo-row">
+          <div class="currency-toggle">
+            <button
+              class="currency-btn"
+              :class="{ 'currency-btn--active': currency === 'USD' }"
+              @click="currency = 'USD'"
+            >USD $</button>
+            <button
+              class="currency-btn"
+              :class="{ 'currency-btn--active': currency === 'CRC' }"
+              @click="currency = 'CRC'"
+            >CRC ₡</button>
+          </div>
+          <div class="promo-sticker">
+            <span class="promo-pct">-20%</span>
+            <span class="promo-sub">Primeras cooperativas</span>
+          </div>
+        </div>
+
         <div class="plans-grid">
 
           <!-- Básico -->
@@ -56,17 +77,25 @@
               <div class="plan-name">Básico</div>
               <div class="plan-desc">Ideal para cooperativas pequeñas que inician su digitalización.</div>
             </div>
+            <div class="plan-price-block">
+              <div class="plan-price-original">$1,077<span class="plan-price-period-sm">/mes</span></div>
+              <div class="plan-price-row">
+                <span class="plan-price-usd plan-price-usd--green">{{ fmt('basico') }}</span>
+                <span class="plan-price-period">/mes</span>
+              </div>
+              <div class="plan-price-note">Con 20% de descuento — primer año</div>
+            </div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Módulos incluidos:</div>
             <ul class="plan-features">
-              <li>Inicio / Dashboard</li>
-              <li>Gestión de personal</li>
-              <li>Gestión de asociados (hasta 200)</li>
+              <li>Dashboard / Inicio</li>
+              <li>Configuración</li>
+              <li>Personal</li>
               <li>Órganos Sociales</li>
+              <li>Asociados</li>
               <li>Asambleas</li>
-              <li>Configuración del sistema</li>
-              <li>5 usuarios del sistema</li>
               <li>Migración de datos incluida</li>
+              <li>Capacitación incluida</li>
               <li>Soporte por correo</li>
             </ul>
           </div>
@@ -76,15 +105,22 @@
             <div class="plan-featured-badge">Más popular</div>
             <div class="plan-header">
               <div class="plan-name">Pro</div>
-              <div class="plan-desc">Para cooperativas en crecimiento con necesidades democráticas avanzadas.</div>
+              <div class="plan-desc">Para cooperativas en crecimiento con gobernanza democrática avanzada.</div>
+            </div>
+            <div class="plan-price-block">
+              <div class="plan-price-original">$1,824<span class="plan-price-period-sm">/mes</span></div>
+              <div class="plan-price-row">
+                <span class="plan-price-usd plan-price-usd--green">{{ fmt('pro') }}</span>
+                <span class="plan-price-period">/mes</span>
+              </div>
+              <div class="plan-price-note">Con 20% de descuento — primer año</div>
             </div>
             <RouterLink to="/" class="plan-cta plan-cta--primary">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Básico, más:</div>
             <ul class="plan-features">
-              <li>Gestión de Comités</li>
+              <li>Comités</li>
               <li>Votaciones electrónicas</li>
-              <li>Hasta 500 asociados</li>
-              <li>10 usuarios del sistema</li>
+              <li>Reportes Gerenciales</li>
               <li>Exportar a Excel / PDF</li>
               <li>Soporte prioritario</li>
             </ul>
@@ -94,28 +130,29 @@
           <div class="plan-card">
             <div class="plan-header">
               <div class="plan-name">Empresarial</div>
-              <div class="plan-desc">Para cooperativas consolidadas que requieren gestión financiera y de riesgos.</div>
+              <div class="plan-desc">Para cooperativas consolidadas con gestión financiera y de riesgos completa.</div>
+            </div>
+            <div class="plan-price-block">
+              <div class="plan-price-original">$3,238<span class="plan-price-period-sm">/mes</span></div>
+              <div class="plan-price-row">
+                <span class="plan-price-usd plan-price-usd--green">{{ fmt('empresarial') }}</span>
+                <span class="plan-price-period">/mes</span>
+              </div>
+              <div class="plan-price-note">Con 20% de descuento — primer año</div>
             </div>
             <RouterLink to="/" class="plan-cta plan-cta--outline">Solicitar demo gratuita</RouterLink>
             <div class="plan-features-label">Todo lo del plan Pro, más:</div>
             <ul class="plan-features">
-              <li>Módulo de Finanzas</li>
-              <li>Módulo de Créditos</li>
-              <li>Gestión de Riesgos</li>
-              <li>Reportes Gerenciales</li>
-              <li>Asociados ilimitados</li>
-              <li>Usuarios ilimitados</li>
-              <li>Personalización de marca</li>
-              <li>Capacitación incluida</li>
+              <li>Finanzas</li>
+              <li>Créditos</li>
+              <li>Riesgos</li>
               <li>Soporte dedicado</li>
             </ul>
           </div>
 
         </div>
 
-        <p class="plans-note">
-          Todos los planes incluyen 30 días de prueba gratuita · Sin tarjeta de crédito · Migración de datos incluida
-        </p>
+
       </div>
     </section>
 
@@ -225,6 +262,20 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const isScrolled = ref(false)
 const menuOpen   = ref(false)
 const openFaq    = ref(null)
+const currency   = ref('USD')
+
+const RATE = 455
+
+const prices = {
+  basico:      { usd: 862,   crc: Math.round(862   * RATE) },
+  pro:         { usd: 1459,  crc: Math.round(1459  * RATE) },
+  empresarial: { usd: 2590,  crc: Math.round(2590  * RATE) },
+}
+
+function fmt(plan) {
+  if (currency.value === 'USD') return `$${prices[plan].usd.toLocaleString('en-US')}`
+  return `₡${prices[plan].crc.toLocaleString('es-CR')}`
+}
 
 function onScroll() { isScrolled.value = window.scrollY > 50 }
 onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
@@ -240,19 +291,19 @@ function renderCell(val) {
 }
 
 const compareRows = [
-  { feature: 'Personal',              basico: true,  pro: true,          empresas: true },
-  { feature: 'Asociados',             basico: true,  pro: true,          empresas: true },
-  { feature: 'Órganos Sociales',      basico: true,  pro: true,          empresas: true },
-  { feature: 'Asambleas',             basico: true,  pro: true,          empresas: true },
-  { feature: 'Comités',               basico: false, pro: true,          empresas: true },
-  { feature: 'Votaciones',            basico: false, pro: true,          empresas: true },
-  { feature: 'Finanzas',              basico: false, pro: false,         empresas: true },
-  { feature: 'Créditos',              basico: false, pro: false,         empresas: true },
-  { feature: 'Riesgos',               basico: false, pro: false,         empresas: true },
-  { feature: 'Reportes Gerenciales',  basico: false, pro: false,         empresas: true },
-  { feature: 'Exportar Excel / PDF',  basico: false, pro: true,          empresas: true },
-  { feature: 'Capacitación incluida', basico: true,  pro: true,          empresas: true },
-  { feature: 'Migración de datos',    basico: true,  pro: true,          empresas: true },
+  { feature: 'Personal',              basico: true,  pro: true,             empresas: true },
+  { feature: 'Asociados',             basico: true,  pro: true,             empresas: true },
+  { feature: 'Órganos Sociales',      basico: true,  pro: true,             empresas: true },
+  { feature: 'Asambleas',             basico: true,  pro: true,             empresas: true },
+  { feature: 'Comités',               basico: false, pro: true,             empresas: true },
+  { feature: 'Votaciones',            basico: false, pro: true,             empresas: true },
+  { feature: 'Reportes Gerenciales',  basico: false, pro: true,             empresas: true },
+  { feature: 'Finanzas',              basico: false, pro: false,            empresas: true },
+  { feature: 'Créditos',              basico: false, pro: false,            empresas: true },
+  { feature: 'Riesgos',               basico: false, pro: false,            empresas: true },
+  { feature: 'Exportar Excel / PDF',  basico: false, pro: true,             empresas: true },
+  { feature: 'Capacitación incluida', basico: true,  pro: true,             empresas: true },
+  { feature: 'Migración de datos',    basico: true,  pro: true,             empresas: true },
   { feature: 'Soporte',               basico: 'Correo', pro: 'Prioritario', empresas: 'Dedicado' },
 ]
 
@@ -428,6 +479,147 @@ const faqs = [
 .plans-section {
   padding: 64px 0 80px;
   background: white;
+}
+
+/* Promo sticker row */
+.plans-promo-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* Currency toggle */
+.currency-toggle {
+  display: flex;
+  background: #F1F5F9;
+  border-radius: 8px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.currency-btn {
+  padding: 6px 18px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+
+.currency-btn--active {
+  background: white;
+  color: #1E293B;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+}
+
+.promo-sticker {
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(ellipse at 38% 35%, #4ade80, #15803d);
+  clip-path: polygon(
+    50% 0%,  58% 19%, 75% 7%,  73% 27%, 93% 25%, 81% 42%,
+    100% 50%, 81% 58%, 93% 75%, 73% 73%, 75% 93%, 58% 81%,
+    50% 100%, 42% 81%, 25% 93%, 27% 73%, 7%  75%, 19% 58%,
+    0%  50%,  19% 42%, 7%  25%, 27% 27%, 25% 7%,  42% 19%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(-8deg);
+  filter:
+    drop-shadow(0 3px 0 rgba(0,80,0,0.5))
+    drop-shadow(3px 5px 10px rgba(0,0,0,0.45))
+    drop-shadow(0 0 16px rgba(22,163,74,0.35));
+  cursor: default;
+  flex-shrink: 0;
+  transition: transform 0.2s, filter 0.2s;
+}
+.promo-sticker:hover {
+  transform: rotate(-8deg) scale(1.08);
+  filter:
+    drop-shadow(0 3px 0 rgba(0,80,0,0.6))
+    drop-shadow(4px 7px 14px rgba(0,0,0,0.5))
+    drop-shadow(0 0 22px rgba(22,163,74,0.5));
+}
+
+.promo-pct {
+  color: white;
+  font-size: 34px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 6px rgba(0,80,0,0.5), 0 1px 0 rgba(0,0,0,0.2);
+}
+
+.promo-sub {
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.25;
+  max-width: 72px;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+/* Plan price block */
+.plan-price-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 20px;
+}
+
+.plan-price-original {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: line-through;
+  line-height: 1.2;
+}
+
+.plan-price-period-sm {
+  font-size: 13px;
+  margin-left: 2px;
+}
+
+.plan-price-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.plan-price-usd {
+  font-size: 38px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.plan-price-usd--green {
+  color: #15803d;
+}
+
+.plan-price-note {
+  font-size: 12px;
+  color: #15803d;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.plan-price-period {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+  font-weight: 500;
 }
 .plans-grid {
   display: grid;

@@ -213,13 +213,11 @@
       <!-- Topbar (desktop only) -->
       <div class="content-topbar" :class="{ 'content-topbar--dark': isDark }">
         <div class="topbar-actions">
-          <button class="modulos-btn" @click="router.push('/modulos')">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-            </svg>
-            Elegir módulos
-          </button>
+          <div class="plan-switcher">
+            <button class="plan-btn" :class="{ 'plan-btn--active': currentPlan === 'basico' }" @click="setPlan('basico')">Básico</button>
+            <button class="plan-btn" :class="{ 'plan-btn--active': currentPlan === 'pro' }" @click="setPlan('pro')">Pro</button>
+            <button class="plan-btn" :class="{ 'plan-btn--active': currentPlan === 'empresarial' }" @click="setPlan('empresarial')">Empresarial</button>
+          </div>
           <button class="cotizacion-btn" @click="showCotizacion = true">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -243,12 +241,11 @@
           <span><strong>Coope</strong>SaaS</span>
         </RouterLink>
         <div class="mobile-topbar-actions">
-          <button class="mobile-icon-btn" @click="router.push('/modulos')" title="Elegir módulos">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
-            </svg>
-          </button>
+          <div class="mobile-plan-switcher">
+            <button :class="{ 'mplan--active': currentPlan === 'basico' }" @click="setPlan('basico')">B</button>
+            <button :class="{ 'mplan--active': currentPlan === 'pro' }" @click="setPlan('pro')">P</button>
+            <button :class="{ 'mplan--active': currentPlan === 'empresarial' }" @click="setPlan('empresarial')">E</button>
+          </div>
           <button class="mobile-cotizacion-btn" @click="showCotizacion = true" title="Generar cotización">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -290,7 +287,21 @@ const route = useRoute()
 const router = useRouter()
 
 const { isAdmin, isOperador, isAsociado, isConsejo, roleInfo } = useRole()
-const { isModuleActive } = useModules()
+const { isModuleActive, setModules } = useModules()
+
+const PLAN_MODULES = {
+  basico:      ['personal', 'organos', 'asociados', 'asambleas'],
+  pro:         ['personal', 'organos', 'asociados', 'asambleas', 'comites', 'votaciones', 'reportes'],
+  empresarial: ['personal', 'organos', 'asociados', 'asambleas', 'comites', 'votaciones', 'reportes', 'riesgos', 'finanzas', 'creditos'],
+}
+
+const currentPlan = ref(localStorage.getItem('coopesaas-plan') || 'basico')
+
+function setPlan(key) {
+  currentPlan.value = key
+  localStorage.setItem('coopesaas-plan', key)
+  setModules(PLAN_MODULES[key])
+}
 const { fullName, userEmail, initials, clearUser } = useAuth()
 
 const isDark = ref(false)
@@ -347,6 +358,9 @@ onMounted(() => {
   if (saved === '1') { isDark.value = true; document.documentElement.classList.add('dark') }
   const savedSidebar = localStorage.getItem('coopesaas-sidebar')
   if (savedSidebar === '1') sidebarCollapsed.value = true
+  const savedPlan = localStorage.getItem('coopesaas-plan') || 'basico'
+  currentPlan.value = savedPlan
+  setModules(PLAN_MODULES[savedPlan])
 })
 
 onUnmounted(() => {
@@ -691,22 +705,28 @@ onUnmounted(() => {
   gap: 8px;
 }
 
-.modulos-btn {
+.plan-switcher {
   display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 14px;
-  border: 1.5px solid #93B8D8;
+  border: 1.5px solid #CBD5E1;
   border-radius: 20px;
+  overflow: hidden;
+}
+
+.plan-btn {
+  padding: 5px 14px;
   font-size: 12px;
   font-weight: 600;
   color: #4A7090;
   background: transparent;
+  border: none;
+  border-right: 1px solid #CBD5E1;
   cursor: pointer;
-  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
-.modulos-btn:hover { background: #133C65; color: white; border-color: #133C65; }
+.plan-btn:last-child { border-right: none; }
+.plan-btn:hover { background: #EEF4FA; color: #133C65; }
+.plan-btn--active { background: #133C65; color: white; }
 
 .cotizacion-btn {
   display: inline-flex;
@@ -749,6 +769,30 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 .mobile-icon-btn:hover { background: #133C65; color: white; border-color: #133C65; }
+
+/* Mobile plan switcher */
+.mobile-plan-switcher {
+  display: inline-flex;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 14px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mobile-plan-switcher button {
+  padding: 4px 9px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #4A7090;
+  background: transparent;
+  border: none;
+  border-right: 1px solid #CBD5E1;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.mobile-plan-switcher button:last-child { border-right: none; }
+.mobile-plan-switcher button:hover { background: #EEF4FA; }
+.mobile-plan-switcher button.mplan--active { background: #133C65; color: white; }
 
 /* Mobile cotización button */
 .mobile-cotizacion-btn {

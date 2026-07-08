@@ -156,7 +156,7 @@ async function handleLogin() {
     )
     if (found) {
       setUser(found)
-      router.push('/modulos')
+      router.push('/dashboard')
     } else {
       loginError.value = 'Correo o contraseña incorrectos. Si aún no tienes acceso, solicita una demo.'
     }

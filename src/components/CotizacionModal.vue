@@ -7,7 +7,7 @@
           <div>
             <h2 class="modal-title">Generar cotización</h2>
             <p class="modal-sub" v-if="activeModules.length > 0">
-              {{ activeModules.length }} módulo(s) · {{ formatCRC(totalCosto) }} · {{ totalSemanas }} semanas
+              {{ activeModules.length }} módulo(s) · {{ formatCRC(totalMensual) }}/mes · {{ totalSemanas }} semanas
             </p>
           </div>
           <button class="modal-close" @click="$emit('close')">
@@ -97,8 +97,8 @@ const MODULE_CATALOG = {
 }
 
 const FIXED_MODULES = [
-  { key: 'dashboard',     name: 'Dashboard / Inicio', semanas: 2, costo: 0, complexity: 'Incluido', badge: 'free' },
-  { key: 'configuracion', name: 'Configuración',       semanas: 2, costo: 0, complexity: 'Incluido', badge: 'free' },
+  { key: 'dashboard',     name: 'Dashboard / Inicio', semanas: 2, costo: 0, complexity: 'Bajo', badge: 'free' },
+  { key: 'configuracion', name: 'Configuración',       semanas: 2, costo: 0, complexity: 'Bajo', badge: 'free' },
 ]
 
 const form = ref({ nombre: '', cedula: '', representante: '', email: '', telefono: '', descuento: '' })
@@ -110,6 +110,42 @@ const activeModules = computed(() =>
 
 const totalCosto   = computed(() => activeModules.value.reduce((s, m) => s + m.costo, 0))
 const totalSemanas = computed(() => activeModules.value.reduce((s, m) => s + m.semanas, 0))
+
+const MONTHLY_COSTS = {
+  dashboard:     36667,
+  configuracion: 43333,
+  personal:     100000,
+  organos:       73333,
+  asociados:    133333,
+  asambleas:    103333,
+  comites:       70000,
+  votaciones:   153333,
+  reportes:     116667,
+  riesgos:      166667,
+  finanzas:     230000,
+  creditos:     246667,
+}
+
+const MODULE_PLAN = {
+  dashboard:     'Básico',
+  configuracion: 'Básico',
+  personal:      'Básico',
+  organos:       'Básico',
+  asociados:     'Básico',
+  asambleas:     'Básico',
+  comites:       'Pro',
+  votaciones:    'Pro',
+  reportes:      'Pro',
+  riesgos:       'Empresarial',
+  finanzas:      'Empresarial',
+  creditos:      'Empresarial',
+}
+
+const totalMensual = computed(() => {
+  const fixedTotal  = FIXED_MODULES.reduce((s, m) => s + (MONTHLY_COSTS[m.key] || 0), 0)
+  const moduleTotal = activeModules.value.reduce((s, m) => s + (MONTHLY_COSTS[m.key] || 0), 0)
+  return fixedTotal + moduleTotal
+})
 
 function formatCRC(n) {
   return '₡' + n.toLocaleString('es-CR')
@@ -196,17 +232,22 @@ function generate() {
     xhigh: 'background:#EDE9FE;color:#5B21B6',
   }
 
+  const planStyles = {
+    'Básico':      'background:#DBEAFE;color:#1E40AF',
+    'Pro':         'background:#EDE9FE;color:#5B21B6',
+    'Empresarial': 'background:#FEF3C7;color:#92400E',
+    'Incluido':    'background:#DCFCE7;color:#166534',
+  }
   const tableRows = allMods.map((m, i) => {
-    const bs = badgeStyles[m.badge] || ''
-    const priceCell = m.costo === 0
-      ? `<span style="color:#166534;font-weight:700">Gratis</span>`
-      : formatCRC(m.costo)
+    const bs       = badgeStyles[m.badge] || ''
+    const planName = MODULE_PLAN[m.key] || 'Incluido'
+    const ps       = planStyles[planName] || ''
     return `<tr>
       <td style="text-align:center;color:#7A90A0">${i + 1}</td>
       <td><strong>${m.name}</strong></td>
       <td><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;${bs}">${m.complexity}</span></td>
       <td style="text-align:center">${m.semanas} sem.</td>
-      <td style="text-align:right;font-weight:600">${priceCell}</td>
+      <td style="text-align:center"><span style="display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;${ps}">${planName}</span></td>
     </tr>`
   }).join('')
 
@@ -306,24 +347,11 @@ function generate() {
       <th>Módulo</th>
       <th>Complejidad</th>
       <th style="text-align:center">Duración</th>
-      <th style="text-align:right">Costo estimado</th>
+      <th style="text-align:center">Plan</th>
     </tr>
   </thead>
   <tbody>
     ${tableRows}
-    <tr class="total-row">
-      <td colspan="3">TOTAL</td>
-      <td style="text-align:center">${allTotalSemanas} semanas</td>
-      <td style="text-align:right">${formatCRC(totalCosto.value)}</td>
-    </tr>
-    ${discountApplied.value ? `<tr style="background:#F0FDF4!important">
-      <td colspan="3" style="color:#166534;font-weight:700">20% de descuento</td>
-      <td></td>
-      <td style="text-align:right">
-        <div style="text-decoration:line-through;color:#7A90A0;font-size:12px;white-space:nowrap">${formatCRC(totalCosto.value)}</div>
-        <div style="font-weight:700;color:#16A34A;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.80))}</div>
-      </td>
-    </tr>` : ''}
   </tbody>
 </table>
 
@@ -332,28 +360,24 @@ function generate() {
   <p style="font-size:11px;color:#5A7490;margin-bottom:6px;line-height:1.6">
     <strong style="color:#133C65">①</strong> Se suscribirá un contrato formal que establecerá el alcance del proyecto, los módulos cotizados, los entregables específicos, los plazos de ejecución y los criterios de aceptación acordados por ambas partes.
   </p>
-  <p style="font-size:11px;color:#5A7490;margin-bottom:6px;line-height:1.6">
-    <strong style="color:#133C65">②</strong> El costo de desarrollo se cancelará en dos tractos: el <strong>60%</strong> al momento de la firma del contrato y el <strong>40%</strong> restante contra la entrega y aceptación formal del sistema por parte del cliente.
-  </p>
   <p style="font-size:11px;color:#5A7490;line-height:1.6">
-    <strong style="color:#133C65">③</strong> La incorporación de módulos adicionales posteriores a la firma del contrato será cotizada de forma independiente. El costo de mantenimiento mensual se recalculará e incrementará proporcionalmente según los módulos vigentes.
+    <strong style="color:#133C65">②</strong> La incorporación de módulos adicionales posteriores a la firma del contrato será cotizada de forma independiente. El costo mensual se recalculará e incrementará proporcionalmente según los módulos vigentes.
   </p>
 </div>
 
-<!-- Mantenimiento mensual -->
+<!-- Costo mensual -->
 <div style="margin-bottom:24px">
-  <div class="sh">Costo de mantenimiento mensual</div>
+  <div class="sh">Costo mensual</div>
   <div style="background:#FFF8E7;border:1.5px solid #E8A31C;border-radius:10px;padding:14px 20px;display:flex;justify-content:space-between;align-items:center">
     <div>
-      <div style="font-size:13px;font-weight:700;color:#133C65">Mantenimiento y soporte mensual</div>
-      <div style="font-size:12px;color:#7A90A0;margin-top:3px">Corresponde al 5% del costo total de los módulos implementados</div>
+      <div style="font-size:13px;font-weight:700;color:#133C65">Costo mensual + mantenimiento + Soporte</div>
     </div>
     <div>
       ${discountApplied.value
-        ? `<div style="font-size:13px;color:#7A90A0;text-decoration:line-through;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))} / mes</div>
-           <div style="font-size:13px;font-weight:600;color:#16A34A;white-space:nowrap;margin-top:3px">${formatCRC(Math.round(totalCosto.value * 0.05 * 0.80))} / mes</div>
+        ? `<div style="font-size:13px;color:#7A90A0;text-decoration:line-through;white-space:nowrap">${formatCRC(totalMensual.value)} / mes</div>
+           <div style="font-size:13px;font-weight:600;color:#16A34A;white-space:nowrap;margin-top:3px">${formatCRC(Math.round(totalMensual.value * 0.80))} / mes</div>
            <div style="font-size:10px;color:#7A90A0;margin-top:2px">Con 20% de descuento — primer año</div>`
-        : `<div style="font-size:13px;font-weight:500;color:#C47F0C;white-space:nowrap">${formatCRC(Math.round(totalCosto.value * 0.05))}<span style="color:#7A90A0"> / mes</span></div>`
+        : `<div style="font-size:13px;font-weight:500;color:#C47F0C;white-space:nowrap">${formatCRC(totalMensual.value)}<span style="color:#7A90A0"> / mes</span></div>`
       }
     </div>
   </div>
