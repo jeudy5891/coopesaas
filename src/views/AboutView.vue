@@ -161,11 +161,11 @@
       <div class="section-wrap cta-inner">
         <h2 class="cta-title">¿Tienes preguntas o quieres conocernos?</h2>
         <p class="cta-sub">Escríbenos directamente. Somos un equipo pequeño y respondemos rápido.</p>
-        <a href="mailto:contacto@coopesaas.com" class="btn-gold-lg">
-          Escribirnos por correo
+        <a href="mailto:jeupma@gmail.com" class="btn-gold-lg">
+          Escríbenos por correo
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
-        <p class="cta-note">contacto@coopesaas.com · Respondemos en menos de 24 horas</p>
+        <p class="cta-note">jeupma@gmail.com · Respondemos en menos de 24 horas</p>
       </div>
     </section>
 
@@ -188,7 +188,7 @@
           <div class="footer-col">
             <h5>Empresa</h5>
             <RouterLink to="/nosotros">Acerca de</RouterLink>
-            <a href="mailto:contacto@coopesaas.com">Contacto</a>
+            <a href="mailto:jeupma@gmail.com">Contacto</a>
           </div>
           <div class="footer-col">
             <h5>Legal</h5>

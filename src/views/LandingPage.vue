@@ -288,7 +288,7 @@
           <div class="footer-col">
             <h5>Empresa</h5>
             <RouterLink to="/nosotros">Acerca de</RouterLink>
-            <a href="mailto:contacto@coopesaas.com">Contacto</a>
+            <a href="mailto:jeupma@gmail.com">Contacto</a>
           </div>
           <div class="footer-col">
             <h5>Legal</h5>
